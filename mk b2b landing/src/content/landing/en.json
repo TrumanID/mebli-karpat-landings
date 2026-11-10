@@ -1,0 +1,123 @@
+{
+  "meta": { "status": "machine_draft", "lastUpdated": "2026-11-05", "sourceHash": "" },
+  "title": "Solid-wood chairs and tables from the maker | Mebli Karpat",
+  "description": "Solid oak and beech chairs and tables direct from the manufacturer, for restaurants, hotels and furniture retail. Custom sizes and private label.",
+  "hero": {
+    "h1": "Solid-wood chairs and tables for hospitality and retail, direct from the manufacturer",
+    "h1Accent": "direct from the manufacturer",
+    "sub": "Made in our own workshop in the Lviv region of Ukraine since 2002: solid oak and beech chairs and tables, as a series, to your dimensions or under your brand.",
+    "imageAlt": "Chicago armchair with an oak frame and light upholstery in a neutral room"
+  },
+  "trust": [
+    { "big": "Since 2002", "small": "solid-wood furniture" },
+    { "big": "Own production", "small": "in western Ukraine, Lviv region" },
+    { "big": "Oak and beech", "small": "solid, oiled or lacquered" },
+    { "big": "Custom sizes", "small": "and private label" }
+  ],
+  "range": {
+    "h2": "The range",
+    "intro": "15 tables and 21 chairs from our own production. Prices on request, depending on specification and quantity.",
+    "tables": "Tables",
+    "chairs": "Chairs"
+  },
+  "segments": {
+    "h2": "Who we make for",
+    "items": [
+      { "id": "gastro", "title": "Restaurants & hotels", "text": "For operators, contract fit-out firms and interior architects: chairs and tables with finishes, fabrics and sizes to suit the project.", "cta": "Discuss a project" },
+      { "id": "trade", "title": "Furniture retail", "text": "For independent stores, buying groups and online shops: a solid-wood range direct from the maker, with trade terms on request.", "cta": "Ask for trade terms" },
+      { "id": "oem", "title": "OEM / private label", "text": "For brands and designers: production to your design and under your brand.", "cta": "Ask about private label" },
+      { "id": "planner", "title": "Planners & architects", "text": "For your specification and planning: dimensions, finish samples and 3D models.", "cta": "Ask for planning data" }
+    ]
+  },
+  "services": {
+    "h2": "Services",
+    "items": [
+      { "title": "Custom manufacturing", "short": "Dimensions, wood and finish to your specification.", "more": "Tables can be adapted in length, width and height, in oak, beech or a combination of the two. Some models extend. TODO(client): minimum quantities and surcharges for custom B2B orders" },
+      { "title": "Private label / OEM", "short": "Production to your design, under your brand.", "more": "TODO(client): OEM terms, monthly capacity, tooling costs, quality control" },
+      { "title": "Samples and sample tables", "short": "Check wood, finish and workmanship before the series.", "more": "TODO(client): sample policy, cost and timing" },
+      { "title": "Project support", "short": "Dimension sheets and 3D models for your planning.", "more": "3D models of our furniture are available through greatcatalog.net. TODO(client): spec sheets and CAD formats" },
+      { "title": "Logistics to Germany", "short": "Lead times are stated as production ex works plus transit.", "more": "TODO(client): Incoterms, transit time, packaging" },
+      { "title": "Certificates and documents", "short": "Paperwork for your checks and for EUDR due diligence.", "more": "TODO(client): name only documents that exist" },
+      { "title": "Service and spare parts", "short": "18-month warranty when storage and use instructions are followed.", "more": "TODO(client): confirm warranty for commercial customers, spare-part supply" }
+    ]
+  },
+  "material": {
+    "h2": "Materials and finishes",
+    "intro": "We work with two European hardwoods, and they can be combined: an oak top on beech legs, for example.",
+    "imageAlt": "Armchair with oiled oak legs and grey upholstery",
+    "image2Alt": "Round table and chairs with white enamel legs and orange upholstery",
+    "tableCaption": "Oak and beech compared",
+    "columns": ["Property", "Oak", "Beech"],
+    "rows": [
+      ["Colour", "Light to yellowish brown", "Pale, with a reddish tone"],
+      ["Grain", "Strong and lively", "Fine and even"],
+      ["Wood type", "Hardwood", "Hardwood"],
+      ["Typical use in our range", "Table tops, chair and table frames", "Table frames and legs, often enamelled"]
+    ],
+    "swatchTodo": "TODO(client): photos of wood and finish samples, hardness values from test reports",
+    "finishesH3": "Finishes",
+    "finishes": [
+      { "name": "Clear oil", "text": "Brings out the natural grain." },
+      { "name": "Oil with tint", "text": "Colours the wood while the grain stays visible." },
+      { "name": "Clear lacquer", "text": "On selected models, a clear lacquered surface." },
+      { "name": "Enamel", "text": "Opaque colour, with custom colours on request." }
+    ],
+    "careH3": "Care in commercial use",
+    "care": "Oiled surfaces can be repaired locally and need regular maintenance; lacquered surfaces are easier to clean. TODO(client): care instructions for hospitality use, per finish"
+  },
+  "quality": {
+    "h2": "Quality and compliance",
+    "intro": "Our furniture is made in Ukraine, in our own workshop in the Lviv region. We list test reports and certificates only when they exist.",
+    "factsH3": "Production",
+    "facts": [
+      "Raw timber from the Lviv region, made in our own workshop",
+      "Two-component glue and water-based lacquers",
+      "Hardware from European manufacturers",
+      "TODO(client): how supply continuity is secured (buffer stock, lead times, contract terms)"
+    ],
+    "eudrH3": "What we supply to importers (EUDR)",
+    "eudrIntro": "Under the EU Deforestation Regulation, the importer files the due-diligence statement and needs data from the manufacturer:",
+    "eudr": ["Wood species", "Origin", "Geolocation data of the harvest plot", "Legality documents"],
+    "eudrTodo": "TODO(client): approve this wording and confirm data availability per model",
+    "docsH3": "Test reports and certificates",
+    "docsTodo": "TODO(client): downloads only for reports that exist, for example EN 16139, EN 15372 and REACH Entry 77"
+  },
+  "process": {
+    "h2": "How it works",
+    "steps": [
+      { "title": "Enquiry", "text": "You tell us the models, quantities and date, with drawings if you have them." },
+      { "title": "Quote", "text": "We reply by email with specification, price and delivery terms." },
+      { "title": "Samples and approval", "text": "You check wood and finish and approve the specification." },
+      { "title": "Production", "text": "Typically 15 to 45 working days, depending on the complexity of the model." },
+      { "title": "Delivery", "text": "Transport under the agreed delivery terms. TODO(client): transit time to Germany" }
+    ]
+  },
+  "projects": {
+    "h2": "Projects",
+    "todo": "TODO(client): project photos with permission and captions (venue type, location, products). Label projects in Ukraine as such"
+  },
+  "terms": {
+    "h2": "Trade terms",
+    "rows": [
+      { "label": "Minimum order", "value": "TODO(client): MOQ" },
+      { "label": "Production time", "value": "Typically 15 to 45 working days, depending on the model" },
+      { "label": "Payment", "value": "50% on order, 50% before dispatch" },
+      { "label": "Incoterms", "value": "TODO(client): delivery terms for Germany" },
+      { "label": "Samples", "value": "TODO(client): sample policy" }
+    ]
+  },
+  "rfq": {
+    "h2": "Request a quote",
+    "intro": "Tell us about your project. We reply by email.",
+    "person": "TODO(client): named contact person (name, role)",
+    "whatsapp": "TODO(client): WhatsApp number",
+    "address": "Kn. Olhy St. 95, Lviv, Ukraine",
+    "hours": "TODO(client): office hours. Time zone: Europe/Kyiv (EET)",
+    "languages": "TODO(client): languages sales can answer in"
+  },
+  "org": {
+    "description": "Manufacturer of solid-wood chairs and tables (oak, beech) for restaurants, hotels and furniture retail.",
+    "knowsAbout": ["Solid-wood furniture", "Restaurant chairs", "Solid-wood tables", "Custom manufacturing", "Private label"],
+    "services": ["Custom manufacturing of solid-wood furniture", "Private-label production of solid-wood furniture"]
+  }
+}

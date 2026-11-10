@@ -1,0 +1,53 @@
+{
+  "slug": "gdansk",
+  "category": "tables",
+  "sourceUrl": "https://meblikarpat.com.ua/stil-gdansk/",
+  "name": "Gdansk",
+  "woods": [
+    "oak"
+  ],
+  "finishes": [
+    "oil",
+    "oil_tint",
+    "enamel"
+  ],
+  "types": [
+    "dining",
+    "extendable"
+  ],
+  "useCases": [
+    "home"
+  ],
+  "variants": [],
+  "images": [
+    {
+      "src": "gdansk-1.jpg",
+      "width": 1000,
+      "height": 1000
+    }
+  ],
+  "hold": true,
+  "lastUpdated": "2026-11-05",
+  "i18n": {
+    "de": {
+      "descriptor": "Esstisch, oval, zwei Einlegeplatten à 500 mm",
+      "description": "",
+      "features": [],
+      "imageAlt": [
+        "Tisch Gdansk: Esstisch, oval, zwei Einlegeplatten à 500 mm, Studioaufnahme"
+      ],
+      "status": "machine_draft",
+      "sourceHash": "d916b25f0604b069"
+    },
+    "en": {
+      "descriptor": "Dining table, oval, two 500 mm leaves",
+      "description": "",
+      "features": [],
+      "imageAlt": [
+        "Table Gdansk: Dining table, oval, two 500 mm leaves, studio photo"
+      ],
+      "status": "machine_draft",
+      "sourceHash": "d916b25f0604b069"
+    }
+  }
+}

@@ -1,0 +1,16 @@
+[
+  { "q": "Welche Holzarten und Oberflächen bieten Sie an?", "a": "Massive Eiche und Buche, auch kombiniert. Als Oberflächen stehen klares Öl, Öl mit Farbton, Klarlack und Farblack (Emaille) zur Wahl. Welche Kombination möglich ist, hängt vom Modell ab." },
+  { "q": "Sind Maßanfertigungen und Sonderfarben möglich? Ab welcher Menge?", "a": "Ja, Maße, Holzart und Farbe lassen sich anpassen. TODO(client): Mindestmengen" },
+  { "q": "Bieten Sie Private Label / OEM an?", "a": "TODO(client): Bedingungen für Private Label und OEM" },
+  { "q": "Wie lange dauern Muster und Serienproduktion?", "a": "Die Standard-Produktionszeit beträgt 15 bis 45 Arbeitstage, je nach Komplexität des Modells. TODO(client): Dauer für Muster und Serien" },
+  { "q": "Wie läuft der Versand nach Deutschland (Incoterms, Transportdauer, Verpackung)?", "a": "TODO(client): Incoterms, Transportdauer, Verpackung" },
+  { "q": "Welche Zahlungsbedingungen gelten für Neukunden?", "a": "Üblich sind 50 % bei Bestellung und 50 % vor Versand. TODO(client): für deutsche Neukunden bestätigen" },
+  { "q": "Welche Dokumente erhalten Importeure für die EU-Entwaldungsverordnung (EUDR)?", "a": "TODO(client): EUDR-Datenpaket und freigegebener Wortlaut" },
+  { "q": "Welche Zertifikate und Prüfberichte gibt es (Holz, Emissionen, Lacke, Belastungstests)?", "a": "TODO(client): Liste der vorhandenen Dokumente" },
+  { "q": "Sind die Stühle für den Dauereinsatz in der Gastronomie geeignet? Welche Belastung wurde geprüft?", "a": "TODO(client): Prüfberichte nach EN 16139 mit Stufe, Labor und Berichtsnummer" },
+  { "q": "Wie stellen Sie Lieferkontinuität sicher?", "a": "TODO(client): Pufferlager, Lieferzeiten, Vertragsbedingungen" },
+  { "q": "Gibt es Ersatzteile und Garantie?", "a": "Wir geben 18 Monate Garantie ab Verkauf, sofern die Lager- und Nutzungshinweise eingehalten werden. TODO(client): für Gewerbekunden bestätigen, Ersatzteile" },
+  { "q": "Wer ist mein Ansprechpartner und in welcher Sprache?", "a": "Schreiben Sie an info@meblikarpat.com.ua oder nutzen Sie das Anfrageformular. TODO(client): Ansprechpartner und Sprachen" },
+  { "q": "Wie hoch sind die Formaldehyd-Emissionen und liegt ein Prüfbericht nach REACH Eintrag 77 vor?", "a": "TODO(client): Prüfbericht am fertigen Möbelstück" },
+  { "q": "Wer ist der EU-Verantwortliche nach der Produktsicherheitsverordnung (GPSR) und wer ist Importeur?", "a": "TODO(client): EU-Wirtschaftsakteur je Markt" }
+]

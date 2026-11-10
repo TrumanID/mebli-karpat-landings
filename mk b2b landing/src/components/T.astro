@@ -1,0 +1,6 @@
+---
+import { splitTodo, isProduction } from '../lib/stage.ts';
+const { value } = Astro.props as { value: string };
+const { text, todo } = splitTodo(value);
+---
+{text}{todo && !isProduction && <>{text && ' '}<mark class="todo">TODO(client): {todo}</mark></>}

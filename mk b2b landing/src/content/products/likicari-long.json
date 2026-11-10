@@ -1,0 +1,54 @@
+{
+  "slug": "likicari-long",
+  "category": "tables",
+  "sourceUrl": "https://meblikarpat.com.ua/stil-derev-janij-likicari-long/",
+  "name": "Likicari Long",
+  "woods": [
+    "oak"
+  ],
+  "finishes": [
+    "oil",
+    "oil_tint",
+    "lacquer",
+    "enamel"
+  ],
+  "types": [
+    "dining",
+    "extendable"
+  ],
+  "useCases": [
+    "home"
+  ],
+  "variants": [],
+  "images": [
+    {
+      "src": "likicari-long-1.jpg",
+      "width": 1000,
+      "height": 1000
+    }
+  ],
+  "hold": true,
+  "lastUpdated": "2026-11-05",
+  "i18n": {
+    "de": {
+      "descriptor": "Esstisch, oval, ausziehbar bis 3400 mm",
+      "description": "",
+      "features": [],
+      "imageAlt": [
+        "Tisch Likicari Long: Esstisch, oval, ausziehbar bis 3400 mm, Studioaufnahme"
+      ],
+      "status": "machine_draft",
+      "sourceHash": "f3092d9242e5eeb9"
+    },
+    "en": {
+      "descriptor": "Dining table, oval, extends to 3400 mm",
+      "description": "",
+      "features": [],
+      "imageAlt": [
+        "Table Likicari Long: Dining table, oval, extends to 3400 mm, studio photo"
+      ],
+      "status": "machine_draft",
+      "sourceHash": "f3092d9242e5eeb9"
+    }
+  }
+}

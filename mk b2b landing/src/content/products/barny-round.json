@@ -1,0 +1,54 @@
+{
+  "slug": "barny-round",
+  "category": "tables",
+  "sourceUrl": "https://meblikarpat.com.ua/stil-barnij-kruhlyi/",
+  "name": "Barny Round",
+  "woods": [
+    "oak"
+  ],
+  "finishes": [
+    "oil",
+    "oil_tint",
+    "enamel"
+  ],
+  "types": [
+    "bistro",
+    "round"
+  ],
+  "useCases": [
+    "gastro",
+    "hotel"
+  ],
+  "variants": [],
+  "images": [
+    {
+      "src": "barny-round-1.jpg",
+      "width": 1000,
+      "height": 1000
+    }
+  ],
+  "hold": true,
+  "lastUpdated": "2026-11-05",
+  "i18n": {
+    "de": {
+      "descriptor": "Bar- und Bistrotisch, rund, Metallfuß",
+      "description": "",
+      "features": [],
+      "imageAlt": [
+        "Tisch Barny Round: Bar- und Bistrotisch, rund, Metallfuß, Studioaufnahme"
+      ],
+      "status": "machine_draft",
+      "sourceHash": "93e636d80733a964"
+    },
+    "en": {
+      "descriptor": "Bar and bistro table, round, metal base",
+      "description": "",
+      "features": [],
+      "imageAlt": [
+        "Table Barny Round: Bar and bistro table, round, metal base, studio photo"
+      ],
+      "status": "machine_draft",
+      "sourceHash": "93e636d80733a964"
+    }
+  }
+}

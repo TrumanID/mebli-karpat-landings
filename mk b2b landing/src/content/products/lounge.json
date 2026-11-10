@@ -1,0 +1,58 @@
+{
+  "slug": "lounge",
+  "category": "chairs",
+  "sourceUrl": "https://meblikarpat.com.ua/stilec-lounge/",
+  "name": "Lounge",
+  "woods": [
+    "oak"
+  ],
+  "finishes": [],
+  "types": [
+    "upholstered"
+  ],
+  "useCases": [
+    "gastro",
+    "hotel",
+    "home"
+  ],
+  "variants": [
+    {
+      "id": "standard",
+      "heightMm": 790,
+      "widthMm": 600,
+      "depthMm": 540,
+      "seatHeightMm": 490
+    }
+  ],
+  "images": [
+    {
+      "src": "lounge-1.jpg",
+      "width": 1000,
+      "height": 1000
+    }
+  ],
+  "hold": true,
+  "lastUpdated": "2026-11-05",
+  "i18n": {
+    "de": {
+      "descriptor": "Polsterstuhl mit halbrunder Rückenlehne",
+      "description": "",
+      "features": [],
+      "imageAlt": [
+        "Stuhl Lounge: Polsterstuhl mit halbrunder Rückenlehne, Studioaufnahme"
+      ],
+      "status": "machine_draft",
+      "sourceHash": "16a48a68a4f10bb3"
+    },
+    "en": {
+      "descriptor": "Upholstered chair with curved back",
+      "description": "",
+      "features": [],
+      "imageAlt": [
+        "Chair Lounge: Upholstered chair with curved back, studio photo"
+      ],
+      "status": "machine_draft",
+      "sourceHash": "16a48a68a4f10bb3"
+    }
+  }
+}

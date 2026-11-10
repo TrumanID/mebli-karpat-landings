@@ -1,0 +1,222 @@
+---
+import { Picture } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import ProductCard from '../components/ProductCard.astro';
+import OrderForm from '../components/OrderForm.astro';
+import Todo from '../components/Todo.astro';
+import { bfPrice, company, offer, products } from '../data/offer.ts';
+import { productImage } from '../lib/images.ts';
+import { uah } from '../lib/order.ts';
+import { isProduction } from '../lib/stage.ts';
+
+if (isProduction) {
+  const missing = [
+    !offer.approved.prices && 'prices (offer.approved.prices)',
+    !offer.approved.dates && 'campaign dates (offer.approved.dates)',
+    !offer.christmasOrderBy && 'Christmas order deadline (offer.christmasOrderBy)',
+  ].filter(Boolean);
+  if (missing.length) throw new Error(`Production build refused, unconfirmed: ${missing.join(', ')}. See docs/todo-client.uk.md.`);
+}
+
+const day = (iso: string, opts: Intl.DateTimeFormatOptions = { day: 'numeric', month: 'long' }) =>
+  new Intl.DateTimeFormat('uk-UA', { timeZone: 'Europe/Kyiv', ...opts }).format(new Date(iso));
+const period = `${day(offer.startsAt, { day: 'numeric' })}–${day(offer.endsAt)}`;
+const chairs = products.filter((p) => p.category === 'chairs');
+const tables = products.filter((p) => p.category === 'tables');
+const minChair = Math.min(...chairs.map(bfPrice));
+const minTable = Math.min(...tables.map(bfPrice));
+const hero = productImage('grand-1.jpg');
+const heroChair = productImage('lounge-1.jpg');
+const heroChair2 = productImage('sydney-1.jpg');
+const ticker = ['Black Friday', `−${offer.discountPercent} %`, 'Чорна п’ятниця', 'Масив дуба', 'Готуємося до Різдва'];
+---
+<Base
+  title={`Black Friday у Меблі Карпат: −${offer.discountPercent} % на стільці та столи з дуба`}
+  description={`Купуйте в Чорну п’ятницю, користуйтеся на Різдво. Стільці та розкладні столи з масиву дуба зі знижкою ${offer.discountPercent} %, ${period}.`}
+  path="/"
+>
+  {!isProduction && (!offer.approved.prices || !offer.approved.dates) && (
+    <div class="preview-banner" role="note">
+      <strong>Чернетка.</strong> Знижка {offer.discountPercent} % і дати акції наведено для прикладу, клієнт їх ще не затвердив.
+      Звичайні ціни взято з meblikarpat.com.ua {day(offer.priceCheckedOn, { day: 'numeric', month: 'long', year: 'numeric' })}.
+    </div>
+  )}
+
+  <section class="hero" aria-labelledby="hero-h">
+    <div class="snow" aria-hidden="true"></div>
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>Black Friday · {period}</p>
+        <h1 id="hero-h" class="hero-h">
+          Купуйте в&nbsp;Чорну п’ятницю.
+          <span class="hero-accent">Користуйтеся на&nbsp;Різдво.</span>
+        </h1>
+        <p class="hero-lead">
+          Стільці та розкладні столи з масиву дуба від виробника, зі знижкою {offer.discountPercent} %.
+          Оберіть моделі й кількість, і ми підготуємо їх до свят.
+        </p>
+        <p class="hero-deadline">
+          {offer.christmasOrderBy
+            ? <>Встигніть до Різдва: замовлення до <strong>{day(offer.christmasOrderBy)}</strong>.</>
+            : <Todo text="до якої дати треба замовити, щоб отримати меблі до 25 грудня" />}
+        </p>
+
+        <div class="countdown" data-countdown data-start={offer.startsAt} data-end={offer.endsAt} data-period={period}>
+          <p class="countdown-label" data-countdown-label>Акція триває {period}</p>
+          <div class="countdown-grid" data-countdown-grid hidden aria-hidden="true">
+            <div><span data-unit="d">0</span><small>днів</small></div>
+            <div><span data-unit="h">0</span><small>год</small></div>
+            <div><span data-unit="m">0</span><small>хв</small></div>
+            <div><span data-unit="s">0</span><small>сек</small></div>
+          </div>
+        </div>
+
+        <div class="hero-cta">
+          <a href="#chairs" class="btn btn-primary btn-lg">Обрати меблі</a>
+          <a href="#how" class="btn btn-ghost btn-lg">Як це працює</a>
+        </div>
+      </div>
+
+      <div class="hero-art" aria-hidden="true">
+        <div class="glow"></div>
+        <div class="art-card art-main">
+          <Picture src={hero} alt="" widths={[480, 720, 960]} sizes="(min-width: 1000px) 480px, 80vw" formats={['avif', 'webp']} loading="eager" fetchpriority="high" />
+        </div>
+        <div class="art-card art-side">
+          <Picture src={heroChair} alt="" widths={[240, 360]} sizes="200px" formats={['avif', 'webp']} loading="eager" />
+        </div>
+        <div class="art-card art-side-2">
+          <Picture src={heroChair2} alt="" widths={[240, 360]} sizes="180px" formats={['avif', 'webp']} loading="eager" />
+        </div>
+        <div class="sticker"><span>−{offer.discountPercent}%</span><small>Black Friday</small></div>
+        <div class="date-tag"><small>до свята</small><span>25.12</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ticker-clip" aria-hidden="true">
+    <div class="ticker">
+      <div class="ticker-track">
+        {[0, 1].map(() => <div class="ticker-set">{[...ticker, ...ticker].map((t) => <span>{t}</span>)}</div>)}
+      </div>
+    </div>
+  </div>
+
+  <section class="perks" aria-label="Чому Меблі Карпат">
+    <ul class="container perk-list">
+      <li><strong>З {company.since} року</strong><span>власне виробництво меблів з масиву</span></li>
+      <li><strong>Масив дерева</strong><span>дуб, для «Форте 01» також бук</span></li>
+      <li><strong>18 місяців</strong><span>гарантія на меблі</span></li>
+      <li><strong>Ваші кольори</strong><span>колір каркаса й тканина з палітри</span></li>
+    </ul>
+  </section>
+
+  <section id="chairs" class="section" aria-labelledby="chairs-h">
+    <div class="container">
+      <div class="section-head">
+        <p class="kicker">Стільці · від {uah(minChair)}</p>
+        <h2 id="chairs-h" class="section-h">Місця для всієї родини</h2>
+        <p class="section-lead">Три моделі з дубовим каркасом і м’якою оббивкою. Тканину й колір каркаса обираєте з палітри.</p>
+      </div>
+      <div class="card-grid">
+        {chairs.map((p) => <ProductCard product={p} />)}
+      </div>
+    </div>
+  </section>
+
+  <section id="tables" class="section section-alt" aria-labelledby="tables-h">
+    <div class="container">
+      <div class="section-head">
+        <p class="kicker">Розкладні столи · від {uah(minTable)}</p>
+        <h2 id="tables-h" class="section-h">Розкладіть, і місця вистачить усім</h2>
+        <p class="section-lead">Щодня компактний, на свята більший. Усі три столи з масиву дуба і розкладаються.</p>
+      </div>
+      <div class="card-grid">
+        {tables.map((p) => <ProductCard product={p} />)}
+      </div>
+      <p class="fine">Ціни вказано для дуба в покритті олія-віск. Для «Гданськ» і «Фабіо» ціна залежить від розміру. Власна комбінація кольорів +10 % до вартості.</p>
+    </div>
+  </section>
+
+  <section id="how" class="section" aria-labelledby="how-h">
+    <div class="container">
+      <div class="section-head">
+        <p class="kicker">Як замовити</p>
+        <h2 id="how-h" class="section-h">Три кроки до святкового столу</h2>
+      </div>
+      <ol class="steps">
+        <li>
+          <span class="step-num" aria-hidden="true">01</span>
+          <h3>Оберіть і надішліть</h3>
+          <p>Вкажіть моделі й кількість, залиште телефон. Ціна Black Friday фіксується в заявці.</p>
+        </li>
+        <li>
+          <span class="step-num" aria-hidden="true">02</span>
+          <h3>Узгодимо деталі</h3>
+          <p>Менеджер допоможе з кольором, тканиною й розміром, надішле договір і рахунок на передоплату 50 %.</p>
+        </li>
+        <li>
+          <span class="step-num" aria-hidden="true">03</span>
+          <h3>Виготовимо й доставимо</h3>
+          <p>Стандартний строк виготовлення від 15 робочих днів, залежно від моделі. Доставка по Львову й області або службою доставки.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="order" class="section section-order" aria-labelledby="order-h" tabindex="-1">
+    <div class="container">
+      <div class="section-head">
+        <p class="kicker">Заявка</p>
+        <h2 id="order-h" class="section-h">Зафіксуйте ціну Black Friday</h2>
+        <p class="section-lead">Перевірте вибір і залиште контакти. Ми зателефонуємо й узгодимо деталі. <Todo text="за який час менеджер відповідає на заявку" /></p>
+      </div>
+      <OrderForm />
+    </div>
+  </section>
+
+  <section id="faq" class="section" aria-labelledby="faq-h">
+    <div class="container faq-wrap">
+      <div class="section-head">
+        <p class="kicker">Питання</p>
+        <h2 id="faq-h" class="section-h">Коротко про головне</h2>
+      </div>
+      <div class="faq">
+        <details>
+          <summary>Чи встигну я отримати меблі до Різдва?</summary>
+          <div class="faq-a">
+            <p>Стандартний строк виготовлення 15–45 робочих днів залежно від моделі, для столу «Гранд» до 60 днів. Тому чим раніше заявка, тим надійніше.</p>
+            <p>{offer.christmasOrderBy ? <>Замовлення, оформлені до {day(offer.christmasOrderBy)}, плануємо доставити до 25 грудня.</> : <Todo text="дата, до якої гарантуєте доставку до Різдва" />}</p>
+          </div>
+        </details>
+        <details>
+          <summary>Як оплатити?</summary>
+          <div class="faq-a"><p>Після узгодження деталей ми оформлюємо договір і бланк замовлення та виставляємо рахунок на передоплату 50 %. Решту ви сплачуєте перед доставкою: готівкою при отриманні або безготівково за 3 дні до доставки по Львову й області. Для доставки в інші міста потрібна повна оплата до відправлення.</p></div>
+        </details>
+        <details>
+          <summary>Як працює доставка?</summary>
+          <div class="faq-a"><p>Доставляємо по Львову та Львівській області за тарифами. В інші міста відправляємо службою доставки за її тарифами. Також можна забрати меблі самостійно з фірмового магазину у Львові.</p></div>
+        </details>
+        <details>
+          <summary>Чи можна обрати колір і тканину?</summary>
+          <div class="faq-a"><p>Так. Колір каркаса й тканину обираєте з нашої палітри, менеджер допоможе. Власна комбінація кольорів коштує +10 % до вартості.</p></div>
+        </details>
+        <details>
+          <summary>Яка гарантія?</summary>
+          <div class="faq-a"><p>18 місяців від дня продажу за умови дотримання правил зберігання та експлуатації.</p></div>
+        </details>
+        <details>
+          <summary>Чи діє знижка на інші моделі?</summary>
+          <div class="faq-a"><p>Ціна Black Friday діє на моделі на цій сторінці. Про інші моделі запитайте менеджера: <a href={`tel:${company.phone}`}>{company.phoneDisplay}</a>. <Todo text="чи поширюється знижка на інші моделі каталогу" /></p></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <div class="cart-bar" data-cart-bar hidden slot="after">
+    <div class="cart-bar-inner">
+      <p class="cart-bar-text"><span data-bar-count>0</span> шт. · <strong data-bar-total>0 ₴</strong> <span class="cart-bar-save">економія <span data-bar-saving>0 ₴</span></span></p>
+      <a href="#order" class="btn btn-primary">Оформити заявку</a>
+    </div>
+  </div>
+</Base>

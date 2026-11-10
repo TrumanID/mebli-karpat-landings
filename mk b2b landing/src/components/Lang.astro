@@ -1,0 +1,19 @@
+---
+import { locales, type Locale } from '../i18n/locales.ts';
+import { localizedPath } from '../i18n/routes.ts';
+import { getContent, publishedLocales, type PageKey } from '../lib/content.ts';
+const { page, locale } = Astro.props as { page: PageKey; locale: Locale };
+const { ui } = getContent(locale);
+const code = (l: Locale) => l.toUpperCase();
+---
+{/* A native <details>, so it works without JS; main.ts adds closing on Escape or an outside click. */}
+<details class="lang-menu" data-dropdown>
+  <summary><span>{code(locale)}</span><span class="sr-only"> – {ui.langLabel}</span></summary>
+  <ul class="lang-panel">
+    {publishedLocales.map((l) => (
+      <li>
+        <a href={localizedPath(page, l)} hreflang={locales[l].htmlLang} lang={locales[l].htmlLang} aria-current={l === locale ? 'true' : undefined} data-event="lang_switch">{code(l)}<span class="sr-only"> – {locales[l].label}</span></a>
+      </li>
+    ))}
+  </ul>
+</details>

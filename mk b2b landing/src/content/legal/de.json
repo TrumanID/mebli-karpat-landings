@@ -1,0 +1,27 @@
+{
+  "thanks": { "title": "Vielen Dank für Ihre Anfrage", "text": "Wir haben Ihre Angaben erhalten und antworten Ihnen per E-Mail. Eine Eingangsbestätigung mit Referenznummer ist unterwegs.", "back": "Zurück zur Startseite" },
+  "imprint": {
+    "title": "Impressum", "description": "Anbieterkennzeichnung von Mebli Karpat.",
+    "notice": "Entwurf: Diese Seite wird vor der Veröffentlichung anwaltlich geprüft.",
+    "rows": [
+      { "label": "Unternehmen", "value": "TODO(client): Name und Rechtsform des Unternehmens" },
+      { "label": "Anschrift", "value": "Kn. Olhy St. 95, Lwiw, Ukraine" },
+      { "label": "Vertretungsberechtigt", "value": "TODO(client): Geschäftsführung" },
+      { "label": "Registernummer", "value": "TODO(client): Registernummer" },
+      { "label": "USt-IdNr.", "value": "TODO(client): USt-IdNr., falls vorhanden" },
+      { "label": "E-Mail", "value": "info@meblikarpat.com.ua" },
+      { "label": "Telefon", "value": "+380 67 969 02 02" }
+    ]
+  },
+  "privacy": {
+    "title": "Datenschutzerklärung", "description": "Informationen zur Verarbeitung personenbezogener Daten bei Mebli Karpat.",
+    "notice": "Entwurf: Der Text entsteht mit Rechtsberatung und wird nicht ungeprüft veröffentlicht.",
+    "sections": [
+      { "h": "Verantwortlicher", "p": "TODO(client): Verantwortlicher und EU-Vertreter nach Art. 27 DSGVO" },
+      { "h": "Anfrageformular", "p": "TODO(client): Zweck, Rechtsgrundlage und Speicherdauer der Anfragedaten, E-Mail-Dienstleister" },
+      { "h": "Reichweitenmessung", "p": "TODO(client): Cookieloser Analysedienst und Anbieter" },
+      { "h": "Empfänger und Übermittlung", "p": "TODO(client): Empfänger, Übermittlung in die Ukraine und Garantien" },
+      { "h": "Ihre Rechte", "p": "TODO(client): Betroffenenrechte und zuständige Aufsichtsbehörde" }
+    ]
+  }
+}

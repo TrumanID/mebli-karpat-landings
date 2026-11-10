@@ -1,0 +1,34 @@
+{
+  "skip": "Skip to content",
+  "menu": "Menu",
+  "nav": { "label": "Main navigation", "range": "Range", "services": "Services", "quality": "Quality", "process": "Process", "faq": "FAQ", "rfq": "Contact" },
+  "langLabel": "Choose language",
+  "cta": { "quote": "Request a quote", "call": "Call", "whatsapp": "WhatsApp", "quoteShort": "Quote", "quoteModel": "Request a quote for this model", "addModel": "Add to quote request", "addedModel": "In your request", "range": "View the range", "catalog": "Download catalogue" },
+  "more": "More",
+  "wood": { "oak": "Oak", "beech": "Beech" },
+  "useCase": { "gastro": "Hospitality", "hotel": "Hotel", "home": "Residential" },
+  "type": { "dining": "Dining table", "bistro": "Bistro/bar", "round": "Round", "extendable": "Extendable", "chair": "Chair", "bar": "Bar stool", "upholstered": "Upholstered", "armrests": "With armrests" },
+  "filter": { "label": "Narrow the selection", "toggle": "Filter", "useCase": "Use", "wood": "Wood", "type": "Type", "reset": "Reset filters", "showAll": "Show all {count} models", "countOne": "{count} model", "countOther": "{count} models", "none": "No model matches this selection." },
+  "dims": { "chair": "H × W × D", "table": "L × W × H", "unit": "mm" },
+  "form": {
+    "name": "Name", "company": "Company", "segment": "Segment", "segmentPlaceholder": "Please choose",
+    "segments": { "gastro": "Restaurant / hotel", "trade": "Furniture retail", "oem": "OEM / private label", "planner": "Planner / architect", "other": "Other" },
+    "email": "Email", "phone": "Phone", "country": "Country and postcode", "products": "Products", "productsHint": "Select several, or describe what you need", "stepNeed": "What you need", "stepContact": "Your contact details", "stepSend": "Confirm and send", "captcha": "Security check", "captchaWaiting": "Starts automatically when you fill in the form.", "captchaSolving": "Checking …", "captchaDone": "Checked. No cookies and no third parties.", "captchaFailed": "The check failed.", "captchaRetry": "Try again", "captchaQuestion": "Security question: what is {a} + {b}?", "selection": "Your selection", "selectionRemove": "remove", "selectionCount": "{count} selected", "selectionAdded": "{name} added to your request", "selectionRemoved": "{name} removed from your request", "moreDetails": "More details (optional)",
+    "tablesGroup": "Tables", "chairsGroup": "Chairs", "productsFree": "Other models or your own description", "quantity": "Approximate quantity", "deliveryDate": "Preferred delivery date",
+    "custom": "Custom manufacturing needed", "yes": "Yes", "no": "No", "message": "Message", "drawings": "Link to drawings", "drawingsHint": "A URL, for example from your file storage",
+    "vatId": "VAT ID", "optional": "optional", "required": "required",
+    "business": "I am enquiring on behalf of a business. Our offers are for commercial customers only.",
+    "consentBefore": "I agree that my details will be processed to handle this enquiry. See the", "consentLink": "privacy notice",
+    "honeypot": "Please leave this field empty",
+    "submit": "Send enquiry", "sending": "Sending …", "note": "No obligation. We reply by email.",
+    "errorSummary": "Please check the marked fields.", "errorSend": "Your enquiry could not be sent. Please email us directly.", "back": "Back to the form",
+    "errors": { "captcha": "The security check did not succeed. Please try again.", "required": "Please fill in this field.", "email": "Please enter a valid email address.", "url": "Please enter a full URL (https://…).", "checked": "Please confirm this to continue.", "invalid": "Please check this entry." }
+  },
+  "contact": { "heading": "Direct contact", "person": "Contact person", "phone": "Phone", "email": "Email", "whatsapp": "WhatsApp", "address": "Address", "hours": "Availability", "languages": "Languages" },
+  "footer": { "b2b": "All offers are for commercial customers only.", "legal": "Legal", "imprint": "Imprint", "privacy": "Privacy", "social": "Social media", "language": "Language", "main": "Main site (Ukrainian)" },
+  "email": {
+    "ackSubject": "Your enquiry to Mebli Karpat ({ref})",
+    "ackBody": "Hello {name},\n\nthank you for your enquiry. Your reference number is {ref}.\n\nOur sales team will review your details and reply by email. This confirmation is not yet a binding offer.\n\nKind regards\nMebli Karpat"
+  },
+  "error404": { "title": "Page not found", "text": "This page does not exist or no longer exists.", "home": "Back to the home page" }
+}

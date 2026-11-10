@@ -1,0 +1,123 @@
+{
+  "meta": { "status": "machine_draft", "lastUpdated": "2026-11-05", "sourceHash": "" },
+  "title": "Massivholzstühle & -tische vom Hersteller | Mebli Karpat",
+  "description": "Stühle und Tische aus massiver Eiche und Buche direkt vom Hersteller. Für Gastronomie, Hotellerie und Handel. Maßanfertigung und Private Label.",
+  "hero": {
+    "h1": "Massivholz-Stühle und -Tische für Gastronomie, Hotellerie und Handel – direkt vom Hersteller",
+    "h1Accent": "direkt vom Hersteller",
+    "sub": "Eigene Fertigung in der Region Lwiw, Ukraine, seit 2002: Stühle und Tische aus massiver Eiche und Buche, als Serie, nach Maß oder unter Ihrer Marke.",
+    "imageAlt": "Armlehnstuhl Chicago mit Eichengestell und hellem Polster in einem neutralen Raum"
+  },
+  "trust": [
+    { "big": "Seit 2002", "small": "Möbel aus Massivholz" },
+    { "big": "Eigene Produktion", "small": "in der Westukraine, Region Lwiw" },
+    { "big": "Eiche und Buche", "small": "massiv, geölt oder lackiert" },
+    { "big": "Maßanfertigung", "small": "und Private Label" }
+  ],
+  "range": {
+    "h2": "Sortiment",
+    "intro": "15 Tische und 21 Stühle aus eigener Fertigung. Preise auf Anfrage, je nach Ausführung und Menge.",
+    "tables": "Tische",
+    "chairs": "Stühle"
+  },
+  "segments": {
+    "h2": "Für wen wir fertigen",
+    "items": [
+      { "id": "gastro", "title": "Gastronomie & Hotellerie", "text": "Für Restaurants, Hotels, Objekteinrichter und Innenarchitekten: Stühle und Tische mit Oberflächen, Bezügen und Maßen passend zum Projekt.", "cta": "Projekt anfragen" },
+      { "id": "trade", "title": "Möbelhandel", "text": "Für Fachhändler, Verbundgruppen und Onlineshops: ein Massivholz-Sortiment direkt vom Hersteller, Konditionen auf Anfrage.", "cta": "Handelskonditionen anfragen" },
+      { "id": "oem", "title": "OEM / Private Label", "text": "Für Marken und Designer: Fertigung nach Ihrem Entwurf und unter Ihrer Marke.", "cta": "Private Label anfragen" },
+      { "id": "planner", "title": "Planer & Architekten", "text": "Für Ihre Ausschreibung und Planung: Maßangaben, Oberflächenmuster und 3D-Modelle.", "cta": "Planungsdaten anfragen" }
+    ]
+  },
+  "services": {
+    "h2": "Leistungen",
+    "items": [
+      { "title": "Maßanfertigung", "short": "Maße, Holzart und Oberfläche nach Ihren Vorgaben.", "more": "Tische lassen sich in Länge, Breite und Höhe anpassen, in Eiche, Buche oder als Kombination aus beiden Hölzern. Einige Modelle sind ausziehbar. TODO(client): Mindestmengen und Aufpreise für Sonderanfertigungen im B2B" },
+      { "title": "Private Label / OEM", "short": "Fertigung nach Ihrem Entwurf, unter Ihrer Marke.", "more": "TODO(client): OEM-Bedingungen, Kapazität pro Monat, Werkzeugkosten, Qualitätskontrolle" },
+      { "title": "Muster und Mustertisch", "short": "Prüfen Sie Holz, Oberfläche und Verarbeitung vor der Serie.", "more": "TODO(client): Musterregelung, Kosten und Dauer" },
+      { "title": "Projektberatung", "short": "Maßblätter und 3D-Modelle für Ihre Planung.", "more": "3D-Modelle unserer Möbel sind über greatcatalog.net verfügbar. TODO(client): Datenblätter und CAD-Formate" },
+      { "title": "Logistik nach Deutschland", "short": "Lieferzeit als Produktionszeit ab Werk plus Transit.", "more": "TODO(client): Incoterms, Transportdauer, Verpackung" },
+      { "title": "Zertifikate und Dokumente", "short": "Unterlagen für Ihre Prüfung und für die EUDR-Sorgfaltspflicht.", "more": "TODO(client): Nur Dokumente nennen, die tatsächlich vorliegen" },
+      { "title": "Service und Ersatzteile", "short": "18 Monate Garantie bei Einhaltung der Lager- und Nutzungshinweise.", "more": "TODO(client): Garantie für Gewerbekunden bestätigen, Ersatzteilversorgung" }
+    ]
+  },
+  "material": {
+    "h2": "Material und Oberflächen",
+    "intro": "Wir arbeiten mit zwei europäischen Harthölzern. Beide lassen sich kombinieren, zum Beispiel eine Platte aus Eiche auf Beinen aus Buche.",
+    "imageAlt": "Armlehnstuhl mit geölten Eichenbeinen und grauem Polster",
+    "image2Alt": "Runder Tisch und Stühle mit weißen, farblackierten Beinen und orangefarbenem Polster",
+    "tableCaption": "Eiche und Buche im Vergleich",
+    "columns": ["Eigenschaft", "Eiche", "Buche"],
+    "rows": [
+      ["Farbe", "Hell- bis gelblich-braun", "Hell, mit rötlichem Ton"],
+      ["Maserung", "Kräftig und lebhaft", "Fein und gleichmäßig"],
+      ["Holzart", "Hartholz", "Hartholz"],
+      ["Typischer Einsatz bei uns", "Tischplatten, Stuhl- und Tischgestelle", "Tischgestelle und Beine, oft farblackiert"]
+    ],
+    "swatchTodo": "TODO(client): Fotos der Holz- und Oberflächenmuster, Härtewerte aus Prüfberichten",
+    "finishesH3": "Oberflächen",
+    "finishes": [
+      { "name": "Öl, klar", "text": "Betont die natürliche Maserung." },
+      { "name": "Öl mit Farbton", "text": "Färbt das Holz, die Maserung bleibt sichtbar." },
+      { "name": "Klarlack", "text": "Für ausgewählte Modelle, klar lackierte Oberfläche." },
+      { "name": "Farblack (Emaille)", "text": "Deckende Farbe, Sonderfarben auf Anfrage." }
+    ],
+    "careH3": "Pflege im gewerblichen Einsatz",
+    "care": "Geölte Oberflächen lassen sich partiell ausbessern und brauchen regelmäßige Nachpflege, lackierte Oberflächen sind einfacher zu reinigen. TODO(client): Pflegeanleitung für den Gastronomieeinsatz je Oberfläche"
+  },
+  "quality": {
+    "h2": "Qualität und Compliance",
+    "intro": "Unsere Möbel entstehen in der Ukraine, im eigenen Betrieb in der Region Lwiw. Prüfberichte und Zertifikate nennen wir nur, wenn sie vorliegen.",
+    "factsH3": "Fertigung",
+    "facts": [
+      "Rohholz aus der Region Lwiw, Fertigung im eigenen Betrieb",
+      "Zweikomponenten-Leim und wasserbasierte Lacke",
+      "Beschläge europäischer Hersteller",
+      "TODO(client): Wie Lieferkontinuität abgesichert ist (Pufferlager, Lieferzeiten, Vertragsbedingungen)"
+    ],
+    "eudrH3": "Was wir Importeuren liefern (EUDR)",
+    "eudrIntro": "Für die EU-Entwaldungsverordnung reicht der Importeur die Sorgfaltserklärung ein. Dafür braucht er Daten vom Hersteller:",
+    "eudr": ["Holzart", "Herkunft", "Geolokalisierungsdaten der Einschlagsfläche", "Legalitätsnachweise"],
+    "eudrTodo": "TODO(client): Wortlaut freigeben und Verfügbarkeit der Daten je Modell bestätigen",
+    "docsH3": "Prüfberichte und Zertifikate",
+    "docsTodo": "TODO(client): Downloads nur für vorhandene Berichte, zum Beispiel EN 16139, EN 15372 und REACH Eintrag 77"
+  },
+  "process": {
+    "h2": "Ablauf",
+    "steps": [
+      { "title": "Anfrage", "text": "Sie nennen Modelle, Mengen und Termin, gern auch mit Zeichnungen." },
+      { "title": "Angebot", "text": "Wir antworten per E-Mail mit Ausführung, Preis und Lieferbedingungen." },
+      { "title": "Muster und Freigabe", "text": "Sie prüfen Holz und Oberfläche und geben die Ausführung frei." },
+      { "title": "Produktion", "text": "Standardmäßig 15 bis 45 Arbeitstage, je nach Komplexität des Modells." },
+      { "title": "Lieferung", "text": "Transport nach den vereinbarten Lieferbedingungen. TODO(client): Transportdauer nach Deutschland" }
+    ]
+  },
+  "projects": {
+    "h2": "Referenzen",
+    "todo": "TODO(client): Projektfotos mit Freigabe und Bildunterschrift (Objektart, Ort, Produkte). Projekte in der Ukraine klar als solche kennzeichnen"
+  },
+  "terms": {
+    "h2": "Handelskonditionen",
+    "rows": [
+      { "label": "Mindestbestellmenge", "value": "TODO(client): MOQ" },
+      { "label": "Produktionszeit", "value": "Standardmäßig 15 bis 45 Arbeitstage, je nach Modell" },
+      { "label": "Zahlung", "value": "50 % bei Bestellung, 50 % vor Versand" },
+      { "label": "Incoterms", "value": "TODO(client): Lieferbedingungen für Deutschland" },
+      { "label": "Muster", "value": "TODO(client): Musterregelung" }
+    ]
+  },
+  "rfq": {
+    "h2": "Angebot anfragen",
+    "intro": "Beschreiben Sie Ihr Vorhaben. Wir antworten per E-Mail.",
+    "person": "TODO(client): Deutschsprachiger Ansprechpartner (Name, Funktion)",
+    "whatsapp": "TODO(client): WhatsApp-Nummer",
+    "address": "Kn. Olhy St. 95, Lwiw, Ukraine",
+    "hours": "TODO(client): Bürozeiten. Zeitzone: Europe/Kyiv (OEZ)",
+    "languages": "TODO(client): Sprachen, in denen der Vertrieb antwortet"
+  },
+  "org": {
+    "description": "Hersteller von Stühlen und Tischen aus Massivholz (Eiche, Buche) für Gastronomie, Hotellerie und Handel.",
+    "knowsAbout": ["Massivholzmöbel", "Gastronomiestühle", "Massivholztische", "Maßanfertigung", "Private Label"],
+    "services": ["Maßanfertigung von Massivholzmöbeln", "Private-Label-Fertigung von Massivholzmöbeln"]
+  }
+}

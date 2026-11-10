@@ -1,0 +1,27 @@
+---
+import type { Locale } from '../i18n/locales.ts';
+import { getContent } from '../lib/content.ts';
+const { locale, types, id } = Astro.props as { locale: Locale; types: string[]; id: string };
+const { ui } = getContent(locale);
+const groups = [
+  { key: 'use', label: ui.filter.useCase, options: (['gastro', 'hotel', 'home'] as const).map((v) => [v, ui.useCase[v]]) },
+  { key: 'wood', label: ui.filter.wood, options: (['oak', 'beech'] as const).map((v) => [v, ui.wood[v]]) },
+  { key: 'type', label: ui.filter.type, options: types.map((v) => [v, ui.type[v as keyof typeof ui.type]]) },
+];
+---
+{/* Progressive enhancement: hidden until main.ts reveals it, because it does nothing without JS. */}
+<div data-filters hidden class="mb-6" role="group" aria-label={ui.filter.label} data-one={ui.filter.countOne} data-other={ui.filter.countOther}>
+  <p class="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-grey-600">
+    <button type="button" class="filter-chip filter-toggle lg:hidden" data-filter-toggle aria-expanded="false" aria-controls={`${id}-filters`}>{ui.filter.toggle}<span data-active></span></button>
+    <span data-count role="status"></span>
+    <button type="button" data-reset hidden class="underline underline-offset-2 min-h-11 cursor-pointer text-charcoal">{ui.filter.reset}</button>
+  </p>
+  <div id={`${id}-filters`} data-filter-panel class="filter-panel mt-3 flex flex-col gap-3 lg:flex-row lg:flex-wrap lg:gap-x-8">
+    {groups.map((g) => (
+      <div class="flex flex-wrap items-center gap-2" role="group" aria-label={g.label}>
+        <span class="text-sm font-semibold text-charcoal me-1">{g.label}</span>
+        {g.options.map(([value, label]) => <button type="button" class="filter-chip" aria-pressed="false" data-group={g.key} data-value={value}>{label}</button>)}
+      </div>
+    ))}
+  </div>
+</div>

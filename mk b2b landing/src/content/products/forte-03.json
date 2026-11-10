@@ -1,0 +1,59 @@
+{
+  "slug": "forte-03",
+  "category": "chairs",
+  "sourceUrl": "https://meblikarpat.com.ua/stilec-forte-03/",
+  "name": "Forte 03",
+  "woods": [
+    "oak",
+    "beech"
+  ],
+  "finishes": [],
+  "types": [
+    "upholstered"
+  ],
+  "useCases": [
+    "gastro",
+    "hotel",
+    "home"
+  ],
+  "variants": [
+    {
+      "id": "standard",
+      "heightMm": 840,
+      "widthMm": 500,
+      "depthMm": 550,
+      "seatHeightMm": 470
+    }
+  ],
+  "images": [
+    {
+      "src": "forte-03-1.jpg",
+      "width": 1000,
+      "height": 1000
+    }
+  ],
+  "hold": true,
+  "lastUpdated": "2026-11-05",
+  "i18n": {
+    "de": {
+      "descriptor": "Polsterstuhl mit geschwungener Lehne",
+      "description": "",
+      "features": [],
+      "imageAlt": [
+        "Stuhl Forte 03: Polsterstuhl mit geschwungener Lehne, Studioaufnahme"
+      ],
+      "status": "machine_draft",
+      "sourceHash": "d403b5c4df34f234"
+    },
+    "en": {
+      "descriptor": "Upholstered chair with curved back",
+      "description": "",
+      "features": [],
+      "imageAlt": [
+        "Chair Forte 03: Upholstered chair with curved back, studio photo"
+      ],
+      "status": "machine_draft",
+      "sourceHash": "d403b5c4df34f234"
+    }
+  }
+}

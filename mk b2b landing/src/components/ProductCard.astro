@@ -1,0 +1,35 @@
+---
+import { Picture } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import T from './T.astro';
+import type { Locale } from '../i18n/locales.ts';
+import { localizedPath } from '../i18n/routes.ts';
+import { getContent } from '../lib/content.ts';
+import { photo } from '../lib/images.ts';
+import { isProduction } from '../lib/stage.ts';
+
+const { product, locale } = Astro.props as { product: CollectionEntry<'products'>['data']; locale: Locale };
+const { ui } = getContent(locale);
+const text = product.i18n[locale];
+const isChair = product.category === 'chairs';
+const types = [...product.types, ...(isChair && !product.types.includes('bar') ? ['chair'] : [])];
+const v = product.variants[0];
+const nf = new Intl.NumberFormat(locale, { useGrouping: false });
+const measures = v && (isChair ? [v.heightMm, v.widthMm, v.depthMm] : [v.lengthMm, v.widthMm, v.heightMm]).filter((n) => n != null);
+const quoteHref = `${localizedPath('home', locale)}?product=${product.slug}#rfq`;
+---
+<li id={`product-${product.slug}`} class="card" data-card data-use={product.useCases.join(' ')} data-wood={product.woods.join(' ')} data-type={types.join(' ')}>
+  <Picture src={photo(product.images[0].src)} formats={['avif', 'webp']} widths={[320, 480, 800]} sizes="(min-width: 1025px) 25vw, (min-width: 481px) 50vw, 40vw"
+    alt={text.imageAlt[0]} loading="lazy" decoding="async" pictureAttributes={{ class: 'block overflow-hidden' }} class="w-full h-auto aspect-square object-cover" />
+  <div class="card-body flex flex-col gap-2 grow min-w-0">
+    <h4 class="text-lg">{product.name}</h4>
+    <p class="text-[0.9375rem] leading-snug text-grey-600">{text.descriptor}</p>
+    {measures && measures.length === 3 && <p class="text-[0.8125rem] text-grey-600"><span class="sr-only">{isChair ? ui.dims.chair : ui.dims.table}: </span>{measures.map((n) => nf.format(n!)).join(' × ')} {ui.dims.unit}</p>}
+    <p class="flex flex-wrap gap-1.5 mt-auto pt-2">
+      {product.woods.map((w) => <span class="chip">{ui.wood[w]}</span>)}
+      {product.woods.length === 0 && !isProduction && <T value="TODO(client): Holzart / wood" />}
+    </p>
+    {/* Without JS this stays a link to the form; rfq.ts upgrades it to a toggle that adds the model to the request. */}
+    <a href={quoteHref} class="add-btn" data-add={product.slug} data-name={product.name} data-label-add={ui.cta.addModel} data-label-added={ui.cta.addedModel}>{ui.cta.quoteModel}<span class="sr-only">: {product.name}</span></a>
+  </div>
+</li>

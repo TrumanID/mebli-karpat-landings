@@ -1,0 +1,38 @@
+---
+import Base from '../layouts/Base.astro';
+import T from './T.astro';
+import type { Locale } from '../i18n/locales.ts';
+import { localizedPath } from '../i18n/routes.ts';
+import { getContent, type PageKey } from '../lib/content.ts';
+import { baseGraph } from '../lib/jsonld.ts';
+import { isProduction, shown } from '../lib/stage.ts';
+const { locale, page } = Astro.props as { locale: Locale; page: Exclude<PageKey, 'home'> };
+const { legal, landing } = getContent(locale);
+const home = localizedPath('home', locale);
+const path = localizedPath(page, locale);
+const imprint = legal.imprint;
+const privacy = legal.privacy;
+const title = page === 'thanks' ? legal.thanks.title : page === 'imprint' ? imprint.title : privacy.title;
+const description = page === 'thanks' ? legal.thanks.text : page === 'imprint' ? imprint.description : privacy.description;
+const graph = baseGraph({ locale, path, title: `${title} | Mebli Karpat`, description, orgDescription: landing.org.description, knowsAbout: landing.org.knowsAbout,
+  crumbs: [{ name: 'Mebli Karpat', path: home }, { name: title, path }] });
+---
+<Base locale={locale} page={page} title={`${title} | Mebli Karpat`} description={description} graph={graph}>
+  <div class="wrap band max-w-4xl!">
+    <h1 class="text-[clamp(2.25rem,1.6rem+3vw,4rem)]!">{title}</h1>
+    {page === 'thanks' && <>
+      <p class="lead mt-6">{legal.thanks.text}</p>
+      <p class="mt-8"><a class="btn btn-secondary" href={home}>{legal.thanks.back}</a></p>
+    </>}
+    {page === 'imprint' && <>
+      {!isProduction && <p class="mt-4 text-grey-600">{imprint.notice}</p>}
+      <dl class="mt-8 border-t border-hairline">
+        {imprint.rows.filter((r) => shown(r.value)).map((r) => <div class="grid sm:grid-cols-[14rem_1fr] gap-x-6 py-3 border-b border-hairline"><dt class="font-semibold text-charcoal">{r.label}</dt><dd><T value={r.value} /></dd></div>)}
+      </dl>
+    </>}
+    {page === 'privacy' && <>
+      {!isProduction && <p class="mt-4 text-grey-600">{privacy.notice}</p>}
+      {privacy.sections.filter((s) => shown(s.p)).map((s) => <section class="mt-8"><h2 class="text-2xl! tracking-tight!">{s.h}</h2><p class="mt-2"><T value={s.p} /></p></section>)}
+    </>}
+  </div>
+</Base>

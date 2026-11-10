@@ -1,0 +1,43 @@
+---
+import { Picture } from 'astro:assets';
+import { bfPrice, offer, type Product } from '../data/offer.ts';
+import { productImage } from '../lib/images.ts';
+import { qtyField, uah } from '../lib/order.ts';
+
+const { product: p } = Astro.props as { product: Product };
+const price = bfPrice(p);
+const saving = p.regular - price;
+const from = p.from ? 'від ' : '';
+const id = qtyField(p.slug);
+const sizes = '(min-width: 1100px) 400px, (min-width: 720px) 45vw, 92vw';
+---
+<article class="card" data-card={p.slug} data-price={price} data-regular={p.regular} data-from={p.from ? '1' : undefined} data-name={`${p.kind} «${p.name}»`}>
+  <div class="card-media">
+    <Picture src={productImage(p.image)} alt={p.imageAlt} widths={[360, 520, 800]} sizes={sizes} formats={['avif', 'webp']} class="card-img" loading="lazy" />
+    <Picture src={productImage(p.image2)} alt="" widths={[360, 520, 800]} sizes={sizes} formats={['avif', 'webp']} class="card-img card-img-alt" loading="lazy" />
+    <span class="badge-sale">−{offer.discountPercent} %</span>
+    {p.category === 'tables' && <span class="badge-tag">Розкладний</span>}
+  </div>
+  <div class="card-body">
+    <p class="card-kind">{p.kind}</p>
+    <h3 class="card-title">{p.name}</h3>
+    <p class="card-desc">{p.descriptor}</p>
+    <ul class="card-specs" aria-label="Характеристики">
+      {p.specs.map((s) => <li>{s}</li>)}
+    </ul>
+    <div class="price">
+      <p class="price-now"><span class="sr-only">Ціна Black Friday: </span>{from}{uah(price)}</p>
+      <p class="price-was"><span class="sr-only">Звичайна ціна: </span><s>{from}{uah(p.regular)}</s></p>
+      <p class="price-save">Економія {uah(saving)}{p.from ? ' і більше' : ''}</p>
+    </div>
+    <div class="qty" data-qty>
+      <label for={id} class="qty-label">Кількість, шт.</label>
+      <div class="qty-row">
+        <button type="button" class="qty-btn" data-step="-1" aria-controls={id} hidden><span aria-hidden="true">−</span><span class="sr-only">Менше: {p.name}</span></button>
+        <input id={id} name={id} form="order-form" type="number" inputmode="numeric" min="0" max={offer.maxQty} step="1" value="0" class="qty-input" data-qty-input={p.slug} />
+        <button type="button" class="qty-btn" data-step="1" aria-controls={id} hidden><span aria-hidden="true">+</span><span class="sr-only">Більше: {p.name}</span></button>
+      </div>
+      <button type="button" class="btn btn-primary btn-block qty-add" data-add hidden>Додати до заявки<span class="sr-only">: {p.kind} «{p.name}»</span></button>
+    </div>
+  </div>
+</article>

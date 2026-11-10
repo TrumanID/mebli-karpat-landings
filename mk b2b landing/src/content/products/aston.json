@@ -1,0 +1,61 @@
+{
+  "slug": "aston",
+  "category": "chairs",
+  "sourceUrl": "https://meblikarpat.com.ua/stilec-asti/",
+  "name": "Aston",
+  "woods": [
+    "oak"
+  ],
+  "finishes": [
+    "oil",
+    "enamel"
+  ],
+  "types": [
+    "upholstered"
+  ],
+  "useCases": [
+    "gastro",
+    "hotel",
+    "home"
+  ],
+  "variants": [
+    {
+      "id": "standard",
+      "heightMm": 860,
+      "widthMm": 490,
+      "depthMm": 540,
+      "seatHeightMm": 470
+    }
+  ],
+  "images": [
+    {
+      "src": "aston-1.jpg",
+      "width": 1000,
+      "height": 1000
+    }
+  ],
+  "hold": true,
+  "lastUpdated": "2026-11-05",
+  "i18n": {
+    "de": {
+      "descriptor": "Polsterstuhl mit hoher Rückenlehne",
+      "description": "",
+      "features": [],
+      "imageAlt": [
+        "Stuhl Aston: Polsterstuhl mit hoher Rückenlehne, Studioaufnahme"
+      ],
+      "status": "machine_draft",
+      "sourceHash": "030c82c65c47e5d8"
+    },
+    "en": {
+      "descriptor": "Upholstered high-back chair",
+      "description": "",
+      "features": [],
+      "imageAlt": [
+        "Chair Aston: Upholstered high-back chair, studio photo"
+      ],
+      "status": "machine_draft",
+      "sourceHash": "030c82c65c47e5d8"
+    }
+  }
+}

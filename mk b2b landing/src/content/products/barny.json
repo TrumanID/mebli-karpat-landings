@@ -1,0 +1,54 @@
+{
+  "slug": "barny",
+  "category": "tables",
+  "sourceUrl": "https://meblikarpat.com.ua/stil-barnij/",
+  "name": "Barny",
+  "woods": [
+    "oak"
+  ],
+  "finishes": [
+    "oil",
+    "oil_tint",
+    "lacquer",
+    "enamel"
+  ],
+  "types": [
+    "bistro"
+  ],
+  "useCases": [
+    "gastro",
+    "hotel"
+  ],
+  "variants": [],
+  "images": [
+    {
+      "src": "barny-1.jpg",
+      "width": 1000,
+      "height": 1000
+    }
+  ],
+  "hold": true,
+  "lastUpdated": "2026-11-05",
+  "i18n": {
+    "de": {
+      "descriptor": "Bar- und Bistrotisch, quadratisch, Metallfuß",
+      "description": "",
+      "features": [],
+      "imageAlt": [
+        "Tisch Barny: Bar- und Bistrotisch, quadratisch, Metallfuß, Studioaufnahme"
+      ],
+      "status": "machine_draft",
+      "sourceHash": "4335754b0cb03bd7"
+    },
+    "en": {
+      "descriptor": "Bar and bistro table, square, metal base",
+      "description": "",
+      "features": [],
+      "imageAlt": [
+        "Table Barny: Bar and bistro table, square, metal base, studio photo"
+      ],
+      "status": "machine_draft",
+      "sourceHash": "4335754b0cb03bd7"
+    }
+  }
+}

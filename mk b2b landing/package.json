@@ -1,0 +1,42 @@
+{
+  "name": "mebli-karpat-b2b",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "engines": {
+    "node": ">=22.12"
+  },
+  "scripts": {
+    "prebuild": "node scripts/build-function-i18n.ts",
+    "predev": "node scripts/build-function-i18n.ts",
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "node scripts/preview-server.ts",
+    "typecheck": "astro check",
+    "check:todos": "node scripts/check-todos.ts",
+    "check:structured-data": "node scripts/check-structured-data.ts",
+    "check:i18n": "node scripts/check-i18n.ts",
+    "check:constraints": "node scripts/check-constraints.ts",
+    "test:unit": "node --test tests/rfq.test.ts",
+    "test:e2e": "playwright test",
+    "check": "npm run typecheck && npm run build && npm run check:todos && npm run check:structured-data && npm run check:i18n && npm run check:constraints && npm run test:unit",
+    "check:release": "npm run build && node scripts/check-todos.ts --strict; a=$?; node scripts/check-i18n.ts --strict; b=$?; node scripts/check-constraints.ts --strict; c=$?; exit $((a+b+c))"
+  },
+  "dependencies": {
+    "@fontsource-variable/bricolage-grotesque": "^5.3.0",
+    "@fontsource-variable/manrope": "^5.3.0",
+    "@tailwindcss/vite": "^4.3.4",
+    "astro": "^7.4.6",
+    "sharp": "^0.35.5",
+    "tailwindcss": "^4.3.4",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.12",
+    "@axe-core/playwright": "^4.14.0",
+    "@playwright/test": "^1.64.1",
+    "@types/node": "^26.6.6",
+    "lighthouse": "^13.6.0",
+    "typescript": "^6.0.3"
+  }
+}

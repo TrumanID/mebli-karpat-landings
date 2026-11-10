@@ -1,0 +1,61 @@
+{
+  "slug": "smart",
+  "category": "tables",
+  "sourceUrl": "https://meblikarpat.com.ua/stil-derev-janij-smart/",
+  "name": "Smart",
+  "woods": [
+    "oak"
+  ],
+  "finishes": [
+    "oil",
+    "oil_tint",
+    "enamel"
+  ],
+  "types": [
+    "dining"
+  ],
+  "useCases": [
+    "gastro",
+    "hotel",
+    "home"
+  ],
+  "variants": [
+    {
+      "id": "standard",
+      "heightMm": 750,
+      "widthMm": 700,
+      "lengthMm": 1000
+    }
+  ],
+  "images": [
+    {
+      "src": "smart-1.jpg",
+      "width": 1000,
+      "height": 1000
+    }
+  ],
+  "hold": true,
+  "lastUpdated": "2026-11-05",
+  "i18n": {
+    "de": {
+      "descriptor": "Esstisch, rechteckig, feste Platte",
+      "description": "",
+      "features": [],
+      "imageAlt": [
+        "Tisch Smart: Esstisch, rechteckig, feste Platte, Studioaufnahme"
+      ],
+      "status": "machine_draft",
+      "sourceHash": "bdd6fb54d8d82d33"
+    },
+    "en": {
+      "descriptor": "Dining table, rectangular, fixed top",
+      "description": "",
+      "features": [],
+      "imageAlt": [
+        "Table Smart: Dining table, rectangular, fixed top, studio photo"
+      ],
+      "status": "machine_draft",
+      "sourceHash": "bdd6fb54d8d82d33"
+    }
+  }
+}

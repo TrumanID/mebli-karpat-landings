@@ -1,0 +1,43 @@
+---
+import Lang from './Lang.astro';
+import { type Locale } from '../i18n/locales.ts';
+import { localizedPath } from '../i18n/routes.ts';
+import { getContent, type PageKey } from '../lib/content.ts';
+import { site } from '../lib/site.ts';
+const { locale, page } = Astro.props as { locale: Locale; page: PageKey };
+const { ui, landing } = getContent(locale);
+const heading = 'font-sans text-sm font-bold tracking-normal !text-white mb-3';
+const link = 'inline-flex items-center min-h-11 text-[0.9375rem] text-grey-300 no-underline hover:text-white hover:underline';
+---
+<footer class="site-footer on-dark bg-ink text-grey-300">
+  <div class="wrap pt-16 pb-12 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+    <div>
+      <img src="/img/logo.png" width="137" height="79" alt="Mebli Karpat" class="h-14 w-auto" />
+      <address class="not-italic mt-3 text-[0.9375rem]">
+        {landing.rfq.address}<br />
+        <a class={link} href={`mailto:${site.email}`} data-event="email_click">{site.email}</a><br />
+        <a class={link} href={`tel:${site.phone}`} data-event="phone_click">{site.phoneDisplay}</a>
+      </address>
+    </div>
+    <nav aria-label={ui.footer.legal}>
+      <h2 class={`${heading} !text-sm !font-semibold`}>{ui.footer.legal}</h2>
+      <ul>
+        <li><a class={link} href={localizedPath('imprint', locale)}>{ui.footer.imprint}</a></li>
+        <li><a class={link} href={localizedPath('privacy', locale)}>{ui.footer.privacy}</a></li>
+        <li><a class={link} href={site.mainSite} rel="noopener">{ui.footer.main}</a></li>
+      </ul>
+    </nav>
+    <nav aria-label={ui.footer.social}>
+      <h2 class={`${heading} !text-sm !font-semibold`}>{ui.footer.social}</h2>
+      <ul>{site.social.map((s) => <li><a class={link} href={s.href} rel="noopener">{s.label}</a></li>)}</ul>
+    </nav>
+    <div>
+      <h2 class={`${heading} !text-sm !font-semibold`}>{ui.footer.language}</h2>
+      <Lang page={page} locale={locale} />
+    </div>
+  </div>
+  <div class="footer-mark" aria-hidden="true" data-mark="Mebli Karpat"></div>
+  <div class="border-t border-white/15">
+    <p class="wrap py-5 text-sm">© {new Date().getFullYear()} Mebli Karpat. {ui.footer.b2b}</p>
+  </div>
+</footer>

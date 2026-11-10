@@ -1,0 +1,56 @@
+{
+  "slug": "milan",
+  "category": "chairs",
+  "sourceUrl": "https://meblikarpat.com.ua/stilec-milan/",
+  "name": "Milan",
+  "woods": [],
+  "finishes": [],
+  "types": [
+    "upholstered"
+  ],
+  "useCases": [
+    "gastro",
+    "hotel",
+    "home"
+  ],
+  "variants": [
+    {
+      "id": "standard",
+      "heightMm": 850,
+      "widthMm": 510,
+      "depthMm": 570,
+      "seatHeightMm": 460
+    }
+  ],
+  "images": [
+    {
+      "src": "milan-1.jpg",
+      "width": 1000,
+      "height": 1000
+    }
+  ],
+  "hold": true,
+  "lastUpdated": "2026-11-05",
+  "i18n": {
+    "de": {
+      "descriptor": "Polsterstuhl mit Längssteppung",
+      "description": "",
+      "features": [],
+      "imageAlt": [
+        "Stuhl Milan: Polsterstuhl mit Längssteppung, Studioaufnahme"
+      ],
+      "status": "machine_draft",
+      "sourceHash": "1ed04ae4b654d21e"
+    },
+    "en": {
+      "descriptor": "Upholstered chair with channel tufting",
+      "description": "",
+      "features": [],
+      "imageAlt": [
+        "Chair Milan: Upholstered chair with channel tufting, studio photo"
+      ],
+      "status": "machine_draft",
+      "sourceHash": "1ed04ae4b654d21e"
+    }
+  }
+}

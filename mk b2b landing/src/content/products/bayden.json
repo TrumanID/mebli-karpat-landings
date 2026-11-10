@@ -1,0 +1,53 @@
+{
+  "slug": "bayden",
+  "category": "tables",
+  "sourceUrl": "https://meblikarpat.com.ua/stil-derev-janij-biden/",
+  "name": "Bayden",
+  "woods": [
+    "oak",
+    "beech"
+  ],
+  "finishes": [
+    "oil",
+    "oil_tint",
+    "enamel"
+  ],
+  "types": [
+    "dining"
+  ],
+  "useCases": [
+    "home"
+  ],
+  "variants": [],
+  "images": [
+    {
+      "src": "bayden-1.jpg",
+      "width": 1000,
+      "height": 1000
+    }
+  ],
+  "hold": true,
+  "lastUpdated": "2026-11-05",
+  "i18n": {
+    "de": {
+      "descriptor": "Esstisch, rechteckig, schräg gestellte Beine",
+      "description": "",
+      "features": [],
+      "imageAlt": [
+        "Tisch Bayden: Esstisch, rechteckig, schräg gestellte Beine, Studioaufnahme"
+      ],
+      "status": "machine_draft",
+      "sourceHash": "e2bb6694fe8870f0"
+    },
+    "en": {
+      "descriptor": "Dining table, rectangular, angled legs",
+      "description": "",
+      "features": [],
+      "imageAlt": [
+        "Table Bayden: Dining table, rectangular, angled legs, studio photo"
+      ],
+      "status": "machine_draft",
+      "sourceHash": "e2bb6694fe8870f0"
+    }
+  }
+}

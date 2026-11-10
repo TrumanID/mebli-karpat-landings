@@ -1,0 +1,58 @@
+{
+  "slug": "dallas",
+  "category": "chairs",
+  "sourceUrl": "https://meblikarpat.com.ua/stilec-dallas/",
+  "name": "Dallas",
+  "woods": [
+    "oak"
+  ],
+  "finishes": [],
+  "types": [
+    "upholstered"
+  ],
+  "useCases": [
+    "gastro",
+    "hotel",
+    "home"
+  ],
+  "variants": [
+    {
+      "id": "standard",
+      "heightMm": 860,
+      "widthMm": 440,
+      "depthMm": 500,
+      "seatHeightMm": 450
+    }
+  ],
+  "images": [
+    {
+      "src": "dallas-1.jpg",
+      "width": 1000,
+      "height": 1000
+    }
+  ],
+  "hold": true,
+  "lastUpdated": "2026-11-05",
+  "i18n": {
+    "de": {
+      "descriptor": "Stuhl mit Polstersitz, Rücken aus Formsperrholz",
+      "description": "",
+      "features": [],
+      "imageAlt": [
+        "Stuhl Dallas: Stuhl mit Polstersitz, Rücken aus Formsperrholz, Studioaufnahme"
+      ],
+      "status": "machine_draft",
+      "sourceHash": "5c1b733aebcdb327"
+    },
+    "en": {
+      "descriptor": "Chair with upholstered seat, moulded plywood back",
+      "description": "",
+      "features": [],
+      "imageAlt": [
+        "Chair Dallas: Chair with upholstered seat, moulded plywood back, studio photo"
+      ],
+      "status": "machine_draft",
+      "sourceHash": "5c1b733aebcdb327"
+    }
+  }
+}

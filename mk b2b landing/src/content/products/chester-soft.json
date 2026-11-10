@@ -1,0 +1,59 @@
+{
+  "slug": "chester-soft",
+  "category": "chairs",
+  "sourceUrl": "https://meblikarpat.com.ua/stilec-chester-soft/",
+  "name": "Chester Soft",
+  "woods": [
+    "oak"
+  ],
+  "finishes": [],
+  "types": [
+    "upholstered",
+    "armrests"
+  ],
+  "useCases": [
+    "gastro",
+    "hotel",
+    "home"
+  ],
+  "variants": [
+    {
+      "id": "standard",
+      "heightMm": 760,
+      "widthMm": 580,
+      "depthMm": 540,
+      "seatHeightMm": 480
+    }
+  ],
+  "images": [
+    {
+      "src": "chester-soft-1.jpg",
+      "width": 1000,
+      "height": 1000
+    }
+  ],
+  "hold": true,
+  "lastUpdated": "2026-11-05",
+  "i18n": {
+    "de": {
+      "descriptor": "Armlehnstuhl, gepolstert, Eichengestell",
+      "description": "",
+      "features": [],
+      "imageAlt": [
+        "Stuhl Chester Soft: Armlehnstuhl, gepolstert, Eichengestell, Studioaufnahme"
+      ],
+      "status": "machine_draft",
+      "sourceHash": "54555873bebdfd9c"
+    },
+    "en": {
+      "descriptor": "Upholstered armchair, oak frame",
+      "description": "",
+      "features": [],
+      "imageAlt": [
+        "Chair Chester Soft: Upholstered armchair, oak frame, studio photo"
+      ],
+      "status": "machine_draft",
+      "sourceHash": "54555873bebdfd9c"
+    }
+  }
+}

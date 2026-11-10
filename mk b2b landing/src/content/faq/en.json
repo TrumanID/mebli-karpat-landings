@@ -1,0 +1,16 @@
+[
+  { "q": "Which woods and finishes do you offer?", "a": "Solid oak and beech, also in combination. Finishes are clear oil, oil with tint, clear lacquer and enamel. The available combinations depend on the model." },
+  { "q": "Can you make custom sizes and colours? From what quantity?", "a": "Yes, dimensions, wood and colour can be adapted. TODO(client): minimum quantities" },
+  { "q": "Do you offer private label or OEM production?", "a": "TODO(client): private-label and OEM terms" },
+  { "q": "How long do samples and series production take?", "a": "Standard production takes 15 to 45 working days, depending on the complexity of the model. TODO(client): timing for samples and series" },
+  { "q": "How does shipping to Germany work (Incoterms, transit time, packaging)?", "a": "TODO(client): Incoterms, transit time, packaging" },
+  { "q": "What payment terms apply to new customers?", "a": "Usually 50% on order and 50% before dispatch. TODO(client): confirm for new German customers" },
+  { "q": "Which documents do importers receive for the EU Deforestation Regulation (EUDR)?", "a": "TODO(client): EUDR data pack and approved wording" },
+  { "q": "Which certificates and test reports exist (wood, emissions, lacquers, strength tests)?", "a": "TODO(client): list of existing documents" },
+  { "q": "Are the chairs suitable for continuous restaurant use? What load was tested?", "a": "TODO(client): EN 16139 test reports with level, lab and report number" },
+  { "q": "How do you secure supply continuity?", "a": "TODO(client): buffer stock, lead times, contract terms" },
+  { "q": "Are spare parts and a warranty available?", "a": "We give an 18-month warranty from sale, provided the storage and use instructions are followed. TODO(client): confirm for commercial customers, spare parts" },
+  { "q": "Who is my contact, and in which language?", "a": "Write to info@meblikarpat.com.ua or use the enquiry form. TODO(client): contact person and languages" },
+  { "q": "What are the formaldehyde emissions, and is there a REACH Entry 77 test report?", "a": "TODO(client): test report on the finished article" },
+  { "q": "Who is the EU responsible person under the GPSR, and who is the importer?", "a": "TODO(client): EU economic operator per market" }
+]

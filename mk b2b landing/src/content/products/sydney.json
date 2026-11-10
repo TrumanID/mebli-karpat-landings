@@ -1,0 +1,58 @@
+{
+  "slug": "sydney",
+  "category": "chairs",
+  "sourceUrl": "https://meblikarpat.com.ua/stilec-sydney/",
+  "name": "Sydney",
+  "woods": [
+    "oak"
+  ],
+  "finishes": [],
+  "types": [
+    "upholstered"
+  ],
+  "useCases": [
+    "gastro",
+    "hotel",
+    "home"
+  ],
+  "variants": [
+    {
+      "id": "standard",
+      "heightMm": 880,
+      "widthMm": 540,
+      "depthMm": 600,
+      "seatHeightMm": 500
+    }
+  ],
+  "images": [
+    {
+      "src": "sydney-1.jpg",
+      "width": 1000,
+      "height": 1000
+    }
+  ],
+  "hold": true,
+  "lastUpdated": "2026-11-05",
+  "i18n": {
+    "de": {
+      "descriptor": "Polsterstuhl mit Steppung",
+      "description": "",
+      "features": [],
+      "imageAlt": [
+        "Stuhl Sydney: Polsterstuhl mit Steppung, Studioaufnahme"
+      ],
+      "status": "machine_draft",
+      "sourceHash": "a40020f5d8251361"
+    },
+    "en": {
+      "descriptor": "Upholstered chair, button-tufted",
+      "description": "",
+      "features": [],
+      "imageAlt": [
+        "Chair Sydney: Upholstered chair, button-tufted, studio photo"
+      ],
+      "status": "machine_draft",
+      "sourceHash": "a40020f5d8251361"
+    }
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "slug": "dallas-soft",
+  "category": "chairs",
+  "sourceUrl": "https://meblikarpat.com.ua/stilec-dallas-soft/",
+  "name": "Dallas Soft",
+  "woods": [
+    "oak"
+  ],
+  "finishes": [],
+  "types": [
+    "upholstered"
+  ],
+  "useCases": [
+    "gastro",
+    "hotel",
+    "home"
+  ],
+  "variants": [
+    {
+      "id": "standard",
+      "heightMm": 860,
+      "widthMm": 440,
+      "depthMm": 510,
+      "seatHeightMm": 450
+    }
+  ],
+  "images": [
+    {
+      "src": "dallas-soft-1.jpg",
+      "width": 1000,
+      "height": 1000
+    }
+  ],
+  "hold": true,
+  "lastUpdated": "2026-11-05",
+  "i18n": {
+    "de": {
+      "descriptor": "Stuhl mit gepolstertem Sitz und Rücken",
+      "description": "",
+      "features": [],
+      "imageAlt": [
+        "Stuhl Dallas Soft: Stuhl mit gepolstertem Sitz und Rücken, Studioaufnahme"
+      ],
+      "status": "machine_draft",
+      "sourceHash": "18d39de152c41733"
+    },
+    "en": {
+      "descriptor": "Chair with upholstered seat and back",
+      "description": "",
+      "features": [],
+      "imageAlt": [
+        "Chair Dallas Soft: Chair with upholstered seat and back, studio photo"
+      ],
+      "status": "machine_draft",
+      "sourceHash": "18d39de152c41733"
+    }
+  }
+}

@@ -1,0 +1,6 @@
+---
+/** A missing client fact. Visible in preview only, so it can never ship. */
+import { isProduction } from '../lib/stage.ts';
+const { text } = Astro.props as { text: string };
+---
+{!isProduction && <mark class="todo">TODO(client): {text}</mark>}

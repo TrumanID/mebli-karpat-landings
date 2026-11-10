@@ -1,0 +1,154 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { segments } from '../lib/rfq-schema.ts';
+import type { Locale } from '../i18n/locales.ts';
+import { localizedPath } from '../i18n/routes.ts';
+import { getContent } from '../lib/content.ts';
+import { NOSCRIPT_QUESTION } from '../lib/captcha.ts';
+
+const { locale, tables, chairs } = Astro.props as { locale: Locale; tables: CollectionEntry<'products'>['data'][]; chairs: CollectionEntry<'products'>['data'][] };
+const { ui } = getContent(locale);
+const f = ui.form;
+const groups = [{ label: f.tablesGroup, items: tables }, { label: f.chairsGroup, items: chairs }];
+type Field = { name: string; label: string; type?: 'text' | 'email' | 'tel' | 'date'; auto?: string; required?: boolean };
+const contact: Field[] = [
+  { name: 'name', label: f.name, auto: 'name', required: true },
+  { name: 'company', label: f.company, auto: 'organization', required: true },
+  { name: 'email', label: f.email, type: 'email', auto: 'email', required: true },
+  { name: 'phone', label: f.phone, type: 'tel', auto: 'tel' },
+  { name: 'country', label: f.country, auto: 'postal-code', required: true },
+];
+const noscriptQuestion = f.captchaQuestion.replace('{a}', String(NOSCRIPT_QUESTION.a)).replace('{b}', String(NOSCRIPT_QUESTION.b));
+const mark = (r?: boolean) => r ? `*` : ` (${f.optional})`;
+---
+<form id="rfq-form" method="post" action="/api/rfq" data-rfq data-errors={JSON.stringify(f.errors)} data-summary={f.errorSummary} data-send-error={f.errorSend} data-sending={f.sending} data-locale={locale} data-remove={f.selectionRemove} data-count={f.selectionCount} data-added={f.selectionAdded} data-removed={f.selectionRemoved} data-dock-label={ui.cta.quote} data-products-default={`${f.tablesGroup} / ${f.chairsGroup}`} class="form-steps">
+  <input type="hidden" name="locale" value={locale} />
+  <input type="hidden" name="submitted_via" value="web" />
+  <input type="hidden" name="ts" value="" />
+  <input type="hidden" name="captcha" value="" />
+  <div class="absolute -start-[9999px]" aria-hidden="true">
+    <label for="rfq-website">{f.honeypot}</label>
+    <input id="rfq-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+  </div>
+
+  <p data-form-status role="alert" hidden class="form-alert"></p>
+
+  <div class="form-step">
+    <h3 class="form-step-title"><span aria-hidden="true">1</span>{f.stepNeed}</h3>
+
+    <div data-selection hidden class="form-box sm:col-span-2 p-4">
+      <p class="font-semibold text-[0.9375rem]">{f.selection}</p>
+      <ul data-selection-list class="flex flex-wrap gap-2 mt-2"></ul>
+    </div>
+
+    <div class="field">
+      <label for="rfq-segment">{f.segment}*</label>
+      <select id="rfq-segment" name="segment" required aria-describedby="err-segment">
+        <option value="">{f.segmentPlaceholder}</option>
+        {segments.map((s) => <option value={s}>{f.segments[s]}</option>)}
+      </select>
+      <span id="err-segment" class="field-error" data-error-for="segment" hidden></span>
+    </div>
+    <div class="field">
+      <label for="rfq-quantity">{f.quantity}{mark()}</label>
+      <input id="rfq-quantity" name="quantity" type="text" autocomplete="off" />
+    </div>
+
+    <fieldset class="field form-box sm:col-span-2 p-4">
+      <legend class="px-2">{f.products}{mark()}</legend>
+      <p class="text-sm text-grey-300 mb-2">{f.productsHint}</p>
+      <details class="disclosure" data-products>
+        <summary class="!text-white"><span data-products-summary>{f.tablesGroup} / {f.chairsGroup}</span></summary>
+        <div class="grid gap-6 pt-3 md:grid-cols-2">
+          {groups.map((g) => (
+            <div>
+              <p class="font-semibold mb-1">{g.label}</p>
+              <ul class="grid grid-cols-1 min-[420px]:grid-cols-2">
+                {g.items.map((p) => <li><label class="check !mb-0 !font-normal"><input type="checkbox" name="products" value={p.slug} /> <span>{p.name}</span></label></li>)}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </details>
+      <div class="mt-3">
+        <label for="rfq-productsFree">{f.productsFree}{mark()}</label>
+        <input id="rfq-productsFree" name="productsFree" type="text" autocomplete="off" />
+      </div>
+    </fieldset>
+
+    <div class="field">
+      <label for="rfq-deliveryDate">{f.deliveryDate}{mark()}</label>
+      <input id="rfq-deliveryDate" name="deliveryDate" type="date" autocomplete="off" />
+    </div>
+    <fieldset class="field">
+      <legend>{f.custom}{mark()}</legend>
+      <div class="flex gap-6">
+        <label class="check !mb-0 !font-normal"><input type="radio" name="custom" value="yes" /> <span>{f.yes}</span></label>
+        <label class="check !mb-0 !font-normal"><input type="radio" name="custom" value="no" /> <span>{f.no}</span></label>
+      </div>
+    </fieldset>
+
+    <div class="field sm:col-span-2">
+      <label for="rfq-message">{f.message}{mark()}</label>
+      <textarea id="rfq-message" name="message" rows="4" autocomplete="off"></textarea>
+    </div>
+
+    <details class="disclosure form-box sm:col-span-2 px-4 py-1">
+      <summary class="!text-white">{f.moreDetails}</summary>
+      <div class="grid gap-5 sm:grid-cols-2 pt-2 pb-3">
+        <div class="field">
+          <label for="rfq-vatId">{f.vatId}{mark()}</label>
+          <input id="rfq-vatId" name="vatId" type="text" autocomplete="off" aria-describedby="err-vatId" />
+          <span id="err-vatId" class="field-error" data-error-for="vatId" hidden></span>
+        </div>
+        <div class="field">
+          <label for="rfq-drawings">{f.drawings}{mark()}</label>
+          <input id="rfq-drawings" name="drawings" type="url" inputmode="url" autocomplete="off" aria-describedby="hint-drawings err-drawings" />
+          <span id="hint-drawings" class="block mt-1 text-sm text-grey-300">{f.drawingsHint}</span>
+          <span id="err-drawings" class="field-error" data-error-for="drawings" hidden></span>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <div class="form-step">
+    <h3 class="form-step-title"><span aria-hidden="true">2</span>{f.stepContact}</h3>
+    {contact.map((c) => (
+      <div class:list={['field', c.name === 'country' && 'sm:col-span-2']}>
+        <label for={`rfq-${c.name}`}>{c.label}{mark(c.required)}</label>
+        <input id={`rfq-${c.name}`} name={c.name} type={c.type ?? 'text'} autocomplete={c.auto} required={c.required} aria-describedby={`err-${c.name}`} />
+        <span id={`err-${c.name}`} class="field-error" data-error-for={c.name} hidden></span>
+      </div>
+    ))}
+  </div>
+
+  <div class="form-step">
+    <h3 class="form-step-title"><span aria-hidden="true">3</span>{f.stepSend}</h3>
+    <div class="field sm:col-span-2">
+      <label class="check !mb-0 !font-normal"><input type="checkbox" name="business" required aria-describedby="err-business" /> <span>{f.business}*</span></label>
+      <span id="err-business" class="field-error" data-error-for="business" hidden></span>
+      <label class="check !mb-0 !font-normal"><input type="checkbox" name="consent" required aria-describedby="err-consent" /> <span>{f.consentBefore} <a href={localizedPath('privacy', locale)} class="!text-white underline">{f.consentLink}</a>.*</span></label>
+      <span id="err-consent" class="field-error" data-error-for="consent" hidden></span>
+    </div>
+
+    <div class="sm:col-span-2">
+      <div class="captcha" data-captcha hidden data-waiting={f.captchaWaiting} data-solving={f.captchaSolving} data-done={f.captchaDone} data-failed={f.captchaFailed}>
+        <span class="captcha-icon" aria-hidden="true"></span>
+        <p><strong class="block text-white text-[0.9375rem]">{f.captcha}</strong> <span class="text-sm" data-captcha-status role="status">{f.captchaWaiting}</span></p>
+        <button type="button" class="btn btn-ghost" data-captcha-retry hidden>{f.captchaRetry}</button>
+      </div>
+      <noscript>
+        <div class="field">
+          <label for="rfq-captchaAnswer">{noscriptQuestion}*</label>
+          <input id="rfq-captchaAnswer" name="captchaAnswer" type="text" inputmode="numeric" autocomplete="off" required />
+        </div>
+      </noscript>
+      <span id="err-captcha" class="field-error" data-error-for="captcha" hidden></span>
+    </div>
+
+    <div class="sm:col-span-2 flex flex-wrap items-center gap-4">
+      <button type="submit" class="btn btn-on-green btn-arrow w-full sm:w-auto">{f.submit}</button>
+      <p class="text-sm text-grey-300">{f.note}</p>
+    </div>
+  </div>
+</form>

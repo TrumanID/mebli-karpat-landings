@@ -1,0 +1,123 @@
+---
+import { NOSCRIPT_QUESTION } from '../lib/captcha.ts';
+import { DELIVERY, MESSAGES } from '../lib/order.ts';
+import { company } from '../data/offer.ts';
+
+const err = (name: string) => `${name}-error`;
+---
+<div class="order-grid">
+  <form id="order-form" class="order-form" action="/api/order" method="post"
+    data-order data-errors={JSON.stringify(MESSAGES)}>
+    <div class="form-status" data-form-status role="alert" tabindex="-1" hidden></div>
+
+    <fieldset class="form-group">
+      <legend class="form-legend"><span class="step-no" aria-hidden="true">1</span> Ваш вибір</legend>
+      <p class="hint" data-items-hint>Кількість вказується в картках моделей вище. Тут її теж можна змінити.</p>
+      <div class="field-error" id={err('items')} data-error-for="items" hidden></div>
+      <noscript>
+        <p class="hint">Перевірте кількість у картках моделей вище перед надсиланням.</p>
+      </noscript>
+      <ul class="pick-list" data-pick-list aria-live="polite"></ul>
+      <p class="pick-empty" data-pick-empty hidden>
+        Ви ще нічого не обрали. <a href="#chairs">Стільці</a> або <a href="#tables">столи</a>?
+      </p>
+    </fieldset>
+
+    <fieldset class="form-group">
+      <legend class="form-legend"><span class="step-no" aria-hidden="true">2</span> Контакти</legend>
+      <div class="fields-2">
+        <div class="field">
+          <label for="f-name">Ім’я <span class="req" aria-hidden="true">*</span></label>
+          <input id="f-name" name="name" type="text" autocomplete="name" required maxlength="100" aria-describedby={err('name')} />
+          <div class="field-error" id={err('name')} data-error-for="name" hidden></div>
+        </div>
+        <div class="field">
+          <label for="f-phone">Телефон <span class="req" aria-hidden="true">*</span></label>
+          <input id="f-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required maxlength="30" placeholder="+380" aria-describedby={err('phone')} />
+          <div class="field-error" id={err('phone')} data-error-for="phone" hidden></div>
+        </div>
+        <div class="field">
+          <label for="f-email">E-mail <span class="opt">для підтвердження, необов’язково</span></label>
+          <input id="f-email" name="email" type="email" autocomplete="email" maxlength="200" aria-describedby={err('email')} />
+          <div class="field-error" id={err('email')} data-error-for="email" hidden></div>
+        </div>
+        <div class="field">
+          <label for="f-city">Населений пункт <span class="req" aria-hidden="true">*</span></label>
+          <input id="f-city" name="city" type="text" autocomplete="address-level2" required maxlength="100" aria-describedby={err('city')} />
+          <div class="field-error" id={err('city')} data-error-for="city" hidden></div>
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset class="form-group" aria-describedby={err('delivery')}>
+      <legend class="form-legend"><span class="step-no" aria-hidden="true">3</span> Отримання</legend>
+      <div class="choice-grid">
+        {Object.entries(DELIVERY).map(([value, label], i) => (
+          <label class="choice">
+            <input type="radio" name="delivery" value={value} required checked={i === 0} />
+            <span>{label}</span>
+          </label>
+        ))}
+      </div>
+      <div class="field-error" id={err('delivery')} data-error-for="delivery" hidden></div>
+      <div class="field">
+        <label for="f-comment">Побажання <span class="opt">колір каркаса, тканина, розмір столу</span></label>
+        <textarea id="f-comment" name="comment" rows="3" maxlength="2000" aria-describedby={err('comment')}></textarea>
+        <div class="field-error" id={err('comment')} data-error-for="comment" hidden></div>
+      </div>
+    </fieldset>
+
+    <div class="form-group form-send">
+      <label class="check">
+        <input type="checkbox" name="consent" required aria-describedby={err('consent')} />
+        <span>Погоджуюся на обробку моїх даних, щоб менеджер зв’язався зі мною щодо заявки. <a href="/privacy/">Детальніше</a></span>
+      </label>
+      <div class="field-error" id={err('consent')} data-error-for="consent" hidden></div>
+
+      <div class="hp" aria-hidden="true">
+        <label for="f-website">Не заповнюйте це поле</label>
+        <input id="f-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+      </div>
+      <input type="hidden" name="ts" value="" />
+      <input type="hidden" name="captcha" value="" />
+
+      <div class="captcha" data-captcha data-waiting="Перевірка, що ви не робот, почнеться автоматично."
+        data-solving="Перевіряємо, що ви не робот…" data-done="Перевірку пройдено." data-failed="Перевірка не вдалася." hidden>
+        <span class="captcha-dot" aria-hidden="true"></span>
+        <span data-captcha-status aria-live="polite">Перевірка, що ви не робот, почнеться автоматично.</span>
+        <button type="button" class="link-btn" data-captcha-retry hidden>Спробувати ще раз</button>
+      </div>
+      <noscript>
+        <div class="field">
+          <label for="f-captcha">Захист від спаму: скільки буде {NOSCRIPT_QUESTION.a} + {NOSCRIPT_QUESTION.b}? <span class="req" aria-hidden="true">*</span></label>
+          <input id="f-captcha" name="captchaAnswer" type="text" inputmode="numeric" required maxlength="3" class="input-short" />
+        </div>
+      </noscript>
+      <div class="field-error" id={err('captcha')} data-error-for="captcha" hidden></div>
+
+      <button type="submit" class="btn btn-primary btn-lg btn-block" data-submit data-sending="Надсилаємо…">Надіслати заявку</button>
+      <p class="hint center">Це заявка, а не оплата. Менеджер узгодить деталі й надішле договір і рахунок на передоплату 50 %.</p>
+    </div>
+  </form>
+
+  <aside class="summary" aria-labelledby="summary-h">
+    <div class="summary-card">
+      <h3 id="summary-h" class="summary-h">Підсумок</h3>
+      <dl class="summary-rows" data-summary hidden>
+        <div><dt>Товарів</dt><dd data-sum-count>0</dd></div>
+        <div><dt>Звичайна ціна</dt><dd><s data-sum-regular>0 ₴</s></dd></div>
+        <div class="sum-save"><dt>Ваша економія</dt><dd data-sum-saving>0 ₴</dd></div>
+        <div class="sum-total"><dt>Разом за ціною Black Friday</dt><dd data-sum-total>0 ₴</dd></div>
+      </dl>
+      <p class="hint" data-sum-from hidden>Для столів «Гданськ» і «Фабіо» ціна залежить від розміру: це ціна «від».</p>
+      <p class="summary-empty" data-sum-empty>Додайте моделі, і тут з’явиться сума та ваша економія.</p>
+      <noscript><p class="summary-empty">Суму підтвердить менеджер.</p></noscript>
+      <ul class="summary-facts">
+        <li>Передоплата 50 % після підписання договору</li>
+        <li>Колір каркаса і тканину обираєте з палітри</li>
+        <li>Гарантія 18 місяців</li>
+      </ul>
+      <p class="summary-call">Зручніше телефоном? <a href={`tel:${company.phone}`}>{company.phoneDisplay}</a></p>
+    </div>
+  </aside>
+</div>

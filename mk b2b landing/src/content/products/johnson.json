@@ -1,0 +1,53 @@
+{
+  "slug": "johnson",
+  "category": "tables",
+  "sourceUrl": "https://meblikarpat.com.ua/stil-derev-janij-johnson/",
+  "name": "Johnson",
+  "woods": [
+    "oak",
+    "beech"
+  ],
+  "finishes": [
+    "oil",
+    "oil_tint",
+    "enamel"
+  ],
+  "types": [
+    "dining"
+  ],
+  "useCases": [
+    "home"
+  ],
+  "variants": [],
+  "images": [
+    {
+      "src": "johnson-1.jpg",
+      "width": 1000,
+      "height": 1000
+    }
+  ],
+  "hold": true,
+  "lastUpdated": "2026-11-05",
+  "i18n": {
+    "de": {
+      "descriptor": "Esstisch mit abgeschrägten Ecken",
+      "description": "",
+      "features": [],
+      "imageAlt": [
+        "Tisch Johnson: Esstisch mit abgeschrägten Ecken, Studioaufnahme"
+      ],
+      "status": "machine_draft",
+      "sourceHash": "8200f2112a15975d"
+    },
+    "en": {
+      "descriptor": "Dining table with chamfered corners",
+      "description": "",
+      "features": [],
+      "imageAlt": [
+        "Table Johnson: Dining table with chamfered corners, studio photo"
+      ],
+      "status": "machine_draft",
+      "sourceHash": "8200f2112a15975d"
+    }
+  }
+}

@@ -1,0 +1,28 @@
+---
+import { company } from '../data/offer.ts';
+---
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div>
+      <img src="/img/logo.png" alt="Меблі Карпат" width="137" height="79" class="footer-logo" loading="lazy" />
+      <p class="muted">Меблі з масиву дерева від виробника з {company.since} року.</p>
+    </div>
+    <div>
+      <h2 class="footer-h">Контакти</h2>
+      <ul class="footer-list">
+        <li><a href={`tel:${company.phone}`}>{company.phoneDisplay}</a></li>
+        <li><a href={`mailto:${company.email}`}>{company.email}</a></li>
+      </ul>
+    </div>
+    <div>
+      <h2 class="footer-h">Інформація</h2>
+      <ul class="footer-list">
+        <li><a href={company.site}>Увесь каталог на meblikarpat.com.ua</a></li>
+        <li><a href="/privacy/">Політика конфіденційності</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="container footer-base">
+    <p>© {new Date().getFullYear()} {company.name}</p>
+  </div>
+</footer>

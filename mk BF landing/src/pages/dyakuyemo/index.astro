@@ -1,0 +1,16 @@
+---
+import Base from '../../layouts/Base.astro';
+import { company } from '../../data/offer.ts';
+---
+<Base title="Дякуємо за заявку: Меблі Карпат" description="Заявку Black Friday отримано." path="/dyakuyemo/" noindex>
+  <section class="section simple">
+    <div class="container narrow">
+      <p class="kicker">Заявку отримано</p>
+      <h1 class="section-h">Дякуємо! Ціну Black Friday зафіксовано у вашій заявці.</h1>
+      <p class="ref" data-ref hidden>Номер заявки: <strong data-ref-value></strong></p>
+      <p class="section-lead">Менеджер зв’яжеться з вами, щоб узгодити колір, тканину, розмір і строк. Якщо ви вказали e-mail, копія заявки вже там.</p>
+      <p class="section-lead">Терміново? Телефонуйте: <a href={`tel:${company.phone}`}>{company.phoneDisplay}</a></p>
+      <p><a href="/" class="btn btn-ghost">На головну</a></p>
+    </div>
+  </section>
+</Base>

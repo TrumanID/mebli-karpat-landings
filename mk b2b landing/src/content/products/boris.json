@@ -1,0 +1,58 @@
+{
+  "slug": "boris",
+  "category": "chairs",
+  "sourceUrl": "https://meblikarpat.com.ua/stilec-boris/",
+  "name": "Boris",
+  "woods": [
+    "oak"
+  ],
+  "finishes": [],
+  "types": [
+    "upholstered"
+  ],
+  "useCases": [
+    "gastro",
+    "hotel",
+    "home"
+  ],
+  "variants": [
+    {
+      "id": "standard",
+      "heightMm": 780,
+      "widthMm": 470,
+      "depthMm": 510,
+      "seatHeightMm": 480
+    }
+  ],
+  "images": [
+    {
+      "src": "boris-1.jpg",
+      "width": 1000,
+      "height": 1000
+    }
+  ],
+  "hold": true,
+  "lastUpdated": "2026-11-05",
+  "i18n": {
+    "de": {
+      "descriptor": "Polsterstuhl mit offener Rückenlehne",
+      "description": "",
+      "features": [],
+      "imageAlt": [
+        "Stuhl Boris: Polsterstuhl mit offener Rückenlehne, Studioaufnahme"
+      ],
+      "status": "machine_draft",
+      "sourceHash": "2dbfc559332141fc"
+    },
+    "en": {
+      "descriptor": "Upholstered chair with open back",
+      "description": "",
+      "features": [],
+      "imageAlt": [
+        "Chair Boris: Upholstered chair with open back, studio photo"
+      ],
+      "status": "machine_draft",
+      "sourceHash": "2dbfc559332141fc"
+    }
+  }
+}

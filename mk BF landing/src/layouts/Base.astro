@@ -1,0 +1,46 @@
+---
+import '@fontsource-variable/unbounded';
+import '@fontsource-variable/manrope';
+import '../styles/global.css';
+import displayFont from '@fontsource-variable/unbounded/files/unbounded-cyrillic-wght-normal.woff2?url';
+import bodyFont from '@fontsource-variable/manrope/files/manrope-cyrillic-wght-normal.woff2?url';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props { title: string; description: string; path: string; noindex?: boolean; header?: boolean }
+const { title, description, path, noindex = false, header = true } = Astro.props;
+const url = new URL(path, Astro.site).href;
+---
+<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex" />}
+    <link rel="canonical" href={url} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Меблі Карпат" />
+    <meta property="og:locale" content="uk_UA" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={url} />
+    <link rel="icon" type="image/png" href="/img/favicon.png" />
+    <meta name="theme-color" content="#0f0e0d" />
+    <meta name="color-scheme" content="dark" />
+    <link rel="preload" as="font" type="font/woff2" href={displayFont} crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href={bodyFont} crossorigin />
+    <slot name="head" />
+  </head>
+  <body>
+    <a href="#main" class="skip">Перейти до змісту</a>
+    {header && <Header />}
+    <main id="main" tabindex="-1">
+      <slot />
+    </main>
+    <Footer />
+    <slot name="after" />
+    <script src="../scripts/main.ts"></script>
+  </body>
+</html>

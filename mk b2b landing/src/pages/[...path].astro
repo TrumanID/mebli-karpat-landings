@@ -1,0 +1,17 @@
+---
+import Landing from '../components/Landing.astro';
+import Simple from '../components/Simple.astro';
+import { localizedPath } from '../i18n/routes.ts';
+import type { Locale } from '../i18n/locales.ts';
+import { builtLocales, pageKeys, type PageKey } from '../lib/content.ts';
+
+/** One route for all locales, so a new language is content only (SPEC §5A). */
+export function getStaticPaths() {
+  return builtLocales.flatMap((locale) => pageKeys.map((page) => ({
+    params: { path: localizedPath(page, locale).replace(/^\/|\/$/g, '') || undefined },
+    props: { locale, page },
+  })));
+}
+const { locale, page } = Astro.props as { locale: Locale; page: PageKey };
+---
+{page === 'home' ? <Landing locale={locale} /> : <Simple locale={locale} page={page} />}

@@ -1,0 +1,24 @@
+---
+import '../styles/global.css';
+import de from '../i18n/ui/de.json';
+import en from '../i18n/ui/en.json';
+import { localizedPath } from '../i18n/routes.ts';
+---
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>{de.error404.title} | Mebli Karpat</title>
+  </head>
+  <body>
+    <main class="wrap band">
+      <h1>{de.error404.title}</h1>
+      <p class="mt-4">{de.error404.text} <a href={localizedPath('home', 'de')}>{de.error404.home}</a></p>
+      <div lang="en" class="mt-10">
+        <h2>{en.error404.title}</h2>
+        <p class="mt-4">{en.error404.text} <a href={localizedPath('home', 'en')}>{en.error404.home}</a></p>
+      </div>
+    </main>
+  </body>
+</html>

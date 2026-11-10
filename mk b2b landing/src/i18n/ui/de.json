@@ -1,0 +1,34 @@
+{
+  "skip": "Zum Inhalt springen",
+  "menu": "Menü",
+  "nav": { "label": "Hauptnavigation", "range": "Sortiment", "services": "Leistungen", "quality": "Qualität", "process": "Ablauf", "faq": "FAQ", "rfq": "Kontakt" },
+  "langLabel": "Sprache wählen",
+  "cta": { "quote": "Angebot anfragen", "call": "Anrufen", "whatsapp": "WhatsApp", "quoteShort": "Angebot", "quoteModel": "Angebot für dieses Modell", "addModel": "Zur Anfrage hinzufügen", "addedModel": "In der Anfrage", "range": "Sortiment ansehen", "catalog": "Katalog herunterladen" },
+  "more": "Mehr dazu",
+  "wood": { "oak": "Eiche", "beech": "Buche" },
+  "useCase": { "gastro": "Gastronomie", "hotel": "Hotel", "home": "Wohnen" },
+  "type": { "dining": "Esstisch", "bistro": "Bistro/Bar", "round": "Rund", "extendable": "Ausziehbar", "chair": "Stuhl", "bar": "Barstuhl", "upholstered": "Gepolstert", "armrests": "Mit Armlehnen" },
+  "filter": { "label": "Auswahl eingrenzen", "toggle": "Filter", "useCase": "Einsatz", "wood": "Holz", "type": "Typ", "reset": "Filter zurücksetzen", "showAll": "Alle {count} Modelle anzeigen", "countOne": "{count} Modell", "countOther": "{count} Modelle", "none": "Kein Modell passt zu dieser Auswahl." },
+  "dims": { "chair": "H × B × T", "table": "L × B × H", "unit": "mm" },
+  "form": {
+    "name": "Name", "company": "Firma", "segment": "Segment", "segmentPlaceholder": "Bitte wählen",
+    "segments": { "gastro": "Gastronomie / Hotel", "trade": "Möbelhandel", "oem": "OEM / Private Label", "planner": "Planer / Architekt", "other": "Sonstiges" },
+    "email": "E-Mail", "phone": "Telefon", "country": "Land und PLZ", "products": "Produkte", "productsHint": "Mehrfachauswahl oder freie Angabe", "stepNeed": "Ihr Bedarf", "stepContact": "Ihre Kontaktdaten", "stepSend": "Bestätigen und senden", "captcha": "Sicherheitsprüfung", "captchaWaiting": "Startet automatisch beim Ausfüllen.", "captchaSolving": "Wird geprüft …", "captchaDone": "Geprüft. Ohne Cookies und ohne Drittanbieter.", "captchaFailed": "Die Prüfung ist fehlgeschlagen.", "captchaRetry": "Erneut versuchen", "captchaQuestion": "Sicherheitsfrage: Wie viel ist {a} + {b}?", "selection": "Ihre Auswahl", "selectionRemove": "entfernen", "selectionCount": "{count} ausgewählt", "selectionAdded": "{name} zur Anfrage hinzugefügt", "selectionRemoved": "{name} aus der Anfrage entfernt", "moreDetails": "Weitere Angaben (optional)",
+    "tablesGroup": "Tische", "chairsGroup": "Stühle", "productsFree": "Weitere Modelle oder eigene Beschreibung", "quantity": "Menge (ca.)", "deliveryDate": "Wunsch-Liefertermin",
+    "custom": "Maßanfertigung gewünscht", "yes": "Ja", "no": "Nein", "message": "Nachricht", "drawings": "Link zu Zeichnungen", "drawingsHint": "URL, zum Beispiel aus Ihrer Dateiablage",
+    "vatId": "USt-IdNr.", "optional": "optional", "required": "Pflichtfeld",
+    "business": "Ich frage für ein Unternehmen an. Das Angebot richtet sich ausschließlich an gewerbliche Kunden.",
+    "consentBefore": "Ich stimme zu, dass meine Angaben zur Bearbeitung der Anfrage verarbeitet werden. Details in der", "consentLink": "Datenschutzerklärung",
+    "honeypot": "Dieses Feld bitte leer lassen",
+    "submit": "Anfrage senden", "sending": "Wird gesendet …", "note": "Unverbindlich. Antwort per E-Mail.",
+    "errorSummary": "Bitte prüfen Sie die markierten Felder.", "errorSend": "Die Anfrage konnte nicht gesendet werden. Bitte schreiben Sie uns direkt per E-Mail.", "back": "Zurück zum Formular",
+    "errors": { "captcha": "Die Sicherheitsprüfung war nicht erfolgreich. Bitte versuchen Sie es erneut.", "required": "Bitte füllen Sie dieses Feld aus.", "email": "Bitte geben Sie eine gültige E-Mail-Adresse an.", "url": "Bitte geben Sie eine vollständige URL an (https://…).", "checked": "Bitte bestätigen Sie dies, um fortzufahren.", "invalid": "Bitte prüfen Sie diese Angabe." }
+  },
+  "contact": { "heading": "Direkter Kontakt", "person": "Ansprechpartner", "phone": "Telefon", "email": "E-Mail", "whatsapp": "WhatsApp", "address": "Adresse", "hours": "Erreichbarkeit", "languages": "Sprachen" },
+  "footer": { "b2b": "Alle Angebote richten sich ausschließlich an gewerbliche Kunden.", "legal": "Rechtliches", "imprint": "Impressum", "privacy": "Datenschutz", "social": "Soziale Medien", "language": "Sprache", "main": "Hauptseite (ukrainisch)" },
+  "email": {
+    "ackSubject": "Ihre Anfrage bei Mebli Karpat ({ref})",
+    "ackBody": "Guten Tag {name},\n\nvielen Dank für Ihre Anfrage. Ihre Referenznummer lautet {ref}.\n\nUnser Vertrieb prüft Ihre Angaben und antwortet Ihnen per E-Mail. Diese Bestätigung ist noch kein verbindliches Angebot.\n\nMit freundlichen Grüßen\nMebli Karpat"
+  },
+  "error404": { "title": "Seite nicht gefunden", "text": "Diese Seite gibt es nicht oder nicht mehr.", "home": "Zur Startseite" }
+}

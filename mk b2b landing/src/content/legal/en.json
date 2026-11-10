@@ -1,0 +1,27 @@
+{
+  "thanks": { "title": "Thank you for your enquiry", "text": "We have received your details and will reply by email. A confirmation with your reference number is on its way.", "back": "Back to the home page" },
+  "imprint": {
+    "title": "Imprint", "description": "Provider identification for Mebli Karpat.",
+    "notice": "Draft: this page is reviewed by counsel before publication.",
+    "rows": [
+      { "label": "Company", "value": "TODO(client): company name and legal form" },
+      { "label": "Address", "value": "Kn. Olhy St. 95, Lviv, Ukraine" },
+      { "label": "Represented by", "value": "TODO(client): managing director" },
+      { "label": "Registration number", "value": "TODO(client): registration number" },
+      { "label": "VAT ID", "value": "TODO(client): VAT ID, if any" },
+      { "label": "Email", "value": "info@meblikarpat.com.ua" },
+      { "label": "Phone", "value": "+380 67 969 02 02" }
+    ]
+  },
+  "privacy": {
+    "title": "Privacy notice", "description": "How Mebli Karpat processes personal data.",
+    "notice": "Draft: this text is written with legal advice and is not published unreviewed.",
+    "sections": [
+      { "h": "Controller", "p": "TODO(client): controller and EU representative under GDPR Art. 27" },
+      { "h": "Enquiry form", "p": "TODO(client): purpose, legal basis and retention of enquiry data, email provider" },
+      { "h": "Audience measurement", "p": "TODO(client): cookieless analytics service and provider" },
+      { "h": "Recipients and transfers", "p": "TODO(client): recipients, transfer to Ukraine and safeguards" },
+      { "h": "Your rights", "p": "TODO(client): data-subject rights and supervisory authority" }
+    ]
+  }
+}

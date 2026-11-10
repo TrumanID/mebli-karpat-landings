@@ -1,0 +1,55 @@
+{
+  "slug": "frankfurt-eko",
+  "category": "tables",
+  "sourceUrl": "https://meblikarpat.com.ua/stil-derev-janij-frankfurt-eko/",
+  "name": "Frankfurt Eko",
+  "woods": [
+    "oak",
+    "beech"
+  ],
+  "finishes": [
+    "oil",
+    "oil_tint",
+    "lacquer",
+    "enamel"
+  ],
+  "types": [
+    "dining",
+    "extendable"
+  ],
+  "useCases": [
+    "home"
+  ],
+  "variants": [],
+  "images": [
+    {
+      "src": "frankfurt-eko-1.jpg",
+      "width": 1000,
+      "height": 1000
+    }
+  ],
+  "hold": true,
+  "lastUpdated": "2026-11-05",
+  "i18n": {
+    "de": {
+      "descriptor": "Esstisch, kompakt, auf Wunsch ausziehbar",
+      "description": "",
+      "features": [],
+      "imageAlt": [
+        "Tisch Frankfurt Eko: Esstisch, kompakt, auf Wunsch ausziehbar, Studioaufnahme"
+      ],
+      "status": "machine_draft",
+      "sourceHash": "45f1e808c85a70a0"
+    },
+    "en": {
+      "descriptor": "Dining table, compact, extendable on request",
+      "description": "",
+      "features": [],
+      "imageAlt": [
+        "Table Frankfurt Eko: Dining table, compact, extendable on request, studio photo"
+      ],
+      "status": "machine_draft",
+      "sourceHash": "45f1e808c85a70a0"
+    }
+  }
+}

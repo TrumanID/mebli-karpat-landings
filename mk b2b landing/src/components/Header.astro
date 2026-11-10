@@ -1,0 +1,38 @@
+---
+import Lang from './Lang.astro';
+import { type Locale } from '../i18n/locales.ts';
+import { localizedPath } from '../i18n/routes.ts';
+import { getContent, type PageKey } from '../lib/content.ts';
+const { locale, page } = Astro.props as { locale: Locale; page: PageKey };
+const { ui } = getContent(locale);
+const home = localizedPath('home', locale);
+const items = (['range', 'services', 'quality', 'process', 'faq', 'rfq'] as const).map((id) => ({ href: `${home}#${id}`, label: ui.nav[id] }));
+---
+<header class="site-header">
+  <div class="wrap">
+    <div class="header-pill">
+      <a href={home} class="shrink-0" aria-label="Mebli Karpat">
+        <img src="/img/logo.png" width="137" height="79" alt="" class="h-11 w-auto" />
+      </a>
+      <nav aria-label={ui.nav.label} class="hidden lg:block" data-section-nav>
+        <ul class="flex gap-0.5">
+          {items.map((i) => <li><a href={i.href} class="nav-link">{i.label}</a></li>)}
+        </ul>
+      </nav>
+      <div class="flex items-center gap-2 md:gap-3">
+        <Lang page={page} locale={locale} />
+        <a href={`${home}#rfq`} class="btn btn-primary hidden md:inline-flex">{ui.cta.quote}<span class="badge" data-selection-badge hidden></span></a>
+        <details class="lg:hidden" data-mobile-nav data-dropdown>
+          <summary class="btn btn-secondary list-none [&::-webkit-details-marker]:hidden">{ui.menu}</summary>
+          <div class="nav-sheet">
+            <nav aria-label={ui.nav.label} class="p-4">
+              <ul>
+                {items.map((i) => <li class="border-b border-hairline"><a href={i.href} class="flex items-center min-h-12 font-semibold text-charcoal no-underline">{i.label}</a></li>)}
+              </ul>
+            </nav>
+          </div>
+        </details>
+      </div>
+    </div>
+  </div>
+</header>
