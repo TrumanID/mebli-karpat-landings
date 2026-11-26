@@ -6,20 +6,20 @@ import { handleChallenge, handleOrder, resetRateLimit } from '../src/lib/order-h
 import { createChallenge, solveChallenge, NOSCRIPT_QUESTION, resetCaptchaReplay } from '../src/lib/captcha.ts';
 
 const SECRET = 'test-secret';
-const env = { BREVO_API_KEY: 'k', ORDER_TO_EMAIL: 'sales@example.com', ORDER_FROM_EMAIL: 'noreply@example.com', CAPTCHA_SECRET: SECRET };
+const env = { ORDER_WEBHOOK_URL: 'https://script.google.com/macros/s/test/exec', ORDER_WEBHOOK_SECRET: 'hook-secret', CAPTCHA_SECRET: SECRET };
 const NOW = Date.parse('2026-11-27T10:00:00Z');
 
 const valid = (extra: Record<string, string> = {}) => ({
-  qty_sydney: '4', qty_grand: '1', name: 'Олена', phone: '+380 67 123 45 67', city: 'Львів',
+  qty_bone: '4', qty_fin: '1', name: 'Олена', phone: '+380 67 123 45 67', city: 'Львів',
   delivery: 'pickup', consent: 'on', ts: String(NOW - 60_000), ...extra,
 });
 
 function mailSpy() {
-  const sent: { to: string; subject: string; text: string }[] = [];
-  const f = (async (_url: string | URL, init?: RequestInit) => {
+  const sent: { url: string; secret: string; replyTo?: string; subject: string; text: string }[] = [];
+  const f = (async (url: string | URL, init?: RequestInit) => {
     const body = JSON.parse(String(init?.body));
-    sent.push({ to: body.to[0].email, subject: body.subject, text: body.textContent });
-    return Response.json({ messageId: 'x' });
+    sent.push({ url: String(url), secret: body.secret, replyTo: body.replyTo, subject: body.subject, text: body.text });
+    return Response.json({ ok: true });
   }) as typeof fetch;
   return { sent, f };
 }
@@ -36,12 +36,12 @@ const noJsCaptcha = { captchaAnswer: String(NOSCRIPT_QUESTION.a + NOSCRIPT_QUEST
 
 beforeEach(() => { resetRateLimit(); resetCaptchaReplay(); });
 
-test('Black Friday price is the regular price minus the discount, rounded down to tens', () => {
+test('Black Friday price is the regular price minus the discount, rounded down to a whole hryvnia', () => {
   for (const p of products) {
     const price = bfPrice(p);
-    assert.equal(price % 10, 0);
-    assert.ok(price <= p.regular * (100 - offer.discountPercent) / 100, p.slug);
-    assert.ok(price > p.regular * (100 - offer.discountPercent) / 100 - 10, p.slug);
+    if (p.bfPriceOverride) { assert.equal(price, p.bfPriceOverride); continue; }
+    const exact = p.regular * (100 - offer.discountPercent) / 100;
+    assert.ok(price <= exact && price > exact - 1, `${p.slug}: ${price} vs ${exact}`);
   }
 });
 
@@ -51,13 +51,13 @@ test('three chairs and three tables are on offer', () => {
 });
 
 test('totals add up lines and savings', () => {
-  const { lines } = linesFrom({ qty_sydney: '4', qty_grand: '1' });
+  const { lines } = linesFrom({ qty_bone: '4', qty_fin: '1' });
   const t = totals(lines);
-  const sydney = products.find((p) => p.slug === 'sydney')!;
-  const grand = products.find((p) => p.slug === 'grand')!;
+  const bone = products.find((p) => p.slug === 'bone')!;
+  const fin = products.find((p) => p.slug === 'fin')!;
   assert.equal(t.count, 5);
-  assert.equal(t.total, 4 * bfPrice(sydney) + bfPrice(grand));
-  assert.equal(t.saving, 4 * (sydney.regular - bfPrice(sydney)) + grand.regular - bfPrice(grand));
+  assert.equal(t.total, 4 * bfPrice(bone) + bfPrice(fin));
+  assert.equal(t.saving, 4 * (bone.regular - bfPrice(bone)) + fin.regular - bfPrice(fin));
   assert.equal(uah(43570), '43 570 ₴');
 });
 
@@ -70,7 +70,7 @@ test('validation: needs at least one product, contacts and consent', () => {
 
 test('validation: rejects bad quantities, phones and e-mails', () => {
   for (const q of ['-1', '1.5', 'abc', String(offer.maxQty + 1)]) {
-    const r = validateOrder(valid({ qty_sydney: q }));
+    const r = validateOrder(valid({ qty_bone: q }));
     assert.equal(r.ok, false, q);
   }
   assert.equal(validateOrder(valid({ phone: '12' })).ok, false);
@@ -81,26 +81,27 @@ test('validation: rejects bad quantities, phones and e-mails', () => {
 });
 
 test('unknown products are ignored: the server prices only what is on offer', () => {
-  const r = validateOrder(valid({ qty_sydney: '0', qty_grand: '0', qty_other: '5', price_sydney: '1' }));
+  const r = validateOrder(valid({ qty_bone: '0', qty_fin: '0', qty_other: '5', price_bone: '1' }));
   assert.equal(r.ok, false);
 });
 
-test('a valid order e-mails sales with server-side prices and confirms to the buyer', async () => {
+test('a valid order goes to the Gmail webhook with server-side prices', async () => {
   const { sent, f } = mailSpy();
   const res = await post({ ...valid({ email: 'olena@example.com', comment: 'Тканина сіра' }), ...noJsCaptcha, price: '1' }, { f });
   assert.equal(res.status, 303);
   assert.match(res.headers.get('location')!, /\/dyakuyemo\/\?ref=BF-20261127-[A-F0-9]{6}$/);
-  assert.equal(sent.length, 2);
-  const sydney = products.find((p) => p.slug === 'sydney')!;
-  assert.equal(sent[0]!.to, 'sales@example.com');
-  assert.match(sent[0]!.text, new RegExp(`Стілець «Сідней»: 4 × ${uah(bfPrice(sydney))}`));
+  assert.equal(sent.length, 1);
+  assert.equal(sent[0]!.url, env.ORDER_WEBHOOK_URL);
+  assert.equal(sent[0]!.secret, 'hook-secret');
+  assert.equal(sent[0]!.replyTo, 'olena@example.com');
+  const bone = products.find((p) => p.slug === 'bone')!;
+  assert.match(sent[0]!.text, new RegExp(`Стілець «Боне»: 4 × ${uah(bfPrice(bone))}`));
   assert.match(sent[0]!.text, /Тканина сіра/);
   assert.match(sent[0]!.text, /Самовивіз/);
-  assert.equal(sent[1]!.to, 'olena@example.com');
-  assert.match(sent[1]!.text, /не замовлення/);
+  assert.match(sent[0]!.subject, /^\[Black Friday\] Олена, 5 шт\. \(BF-/);
 });
 
-test('without an e-mail only sales get a message', async () => {
+test('without an e-mail the request is still sent, with no reply address', async () => {
   const { sent, f } = mailSpy();
   const res = await post({ ...valid(), ...noJsCaptcha }, { f, json: true });
   assert.equal(res.status, 200);
@@ -108,10 +109,11 @@ test('without an e-mail only sales get a message', async () => {
   assert.equal(json.ok, true);
   assert.match(json.redirect, /^\/dyakuyemo\/\?ref=BF-/);
   assert.equal(sent.length, 1);
+  assert.equal(sent[0]!.replyTo, undefined);
 });
 
 test('validation errors come back as codes (JSON) or an escaped page (no JS)', async () => {
-  const res = await post({ ...valid({ name: '<b>', qty_sydney: '0', qty_grand: '0' }), ...noJsCaptcha }, { json: true });
+  const res = await post({ ...valid({ name: '<b>', qty_bone: '0', qty_fin: '0' }), ...noJsCaptcha }, { json: true });
   assert.equal(res.status, 422);
   const json = await res.json() as { errors: Record<string, string> };
   assert.equal(json.errors.items, 'items');
@@ -135,16 +137,18 @@ test('captcha: wrong no-JS answer is refused, a solved challenge is accepted onc
   assert.equal(replay.status, 422);
 });
 
-test('without a captcha secret or mail settings the form refuses instead of losing orders', async () => {
+test('without a captcha secret or webhook settings the form refuses instead of losing orders', async () => {
   assert.equal((await post({ ...valid(), ...noJsCaptcha }, { e: { CAPTCHA_SECRET: '' } })).status, 503);
   assert.equal((await handleChallenge({})).status, 503);
-  assert.equal((await post({ ...valid(), ...noJsCaptcha }, { e: { BREVO_API_KEY: '' } })).status, 503);
+  assert.equal((await post({ ...valid(), ...noJsCaptcha }, { e: { ORDER_WEBHOOK_URL: '' } })).status, 503);
 });
 
-test('mail provider failure is reported, not hidden', async () => {
+test('webhook failure is reported, not hidden', async () => {
   const failing = (async () => new Response('', { status: 500 })) as unknown as typeof fetch;
   const res = await post({ ...valid(), ...noJsCaptcha }, { f: failing, json: true });
   assert.equal(res.status, 502);
+  const refused = (async () => Response.json({ ok: false })) as unknown as typeof fetch;
+  assert.equal((await post({ ...valid(), ...noJsCaptcha }, { f: refused, json: true })).status, 502);
 });
 
 test('spam: honeypot and instant submits look accepted but send nothing', async () => {

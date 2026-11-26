@@ -23,7 +23,7 @@ for (const [name, width, height] of [['small phone', 320, 640], ['phone', 360, 7
     const errors = await ready(page);
     expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);
     await axe(page);
-    await page.locator('[data-card="lounge"] [data-add]').click();
+    await page.locator('[data-card="boris"] [data-add]').click();
     await page.locator('.faq details').first().locator('summary').click();
     await axe(page);
     expect(errors).toEqual([]);
@@ -45,15 +45,15 @@ test('shows 3 chairs and 3 tables with old and new prices', async ({ page }) => 
 
 test('choosing models updates the summary, badge and pick list', async ({ page }) => {
   await ready(page);
-  const sydney = page.locator('[data-card="sydney"]');
-  const price = Number(await sydney.getAttribute('data-price'));
-  const regular = Number(await sydney.getAttribute('data-regular'));
-  await sydney.locator('[data-add]').click();
-  await expect(sydney).toHaveClass(/is-picked/);
-  await expect(sydney.locator('input')).toBeFocused();
-  await sydney.locator('[data-step="1"]').click();
-  await sydney.locator('[data-step="1"]').click();
-  await expect(sydney.locator('input')).toHaveValue('3');
+  const bone = page.locator('[data-card="bone"]');
+  const price = Number(await bone.getAttribute('data-price'));
+  const regular = Number(await bone.getAttribute('data-regular'));
+  await bone.locator('[data-add]').click();
+  await expect(bone).toHaveClass(/is-picked/);
+  await expect(bone.locator('input')).toBeFocused();
+  await bone.locator('[data-step="1"]').click();
+  await bone.locator('[data-step="1"]').click();
+  await expect(bone.locator('input')).toHaveValue('3');
   const fmt = (n: number) => `${new Intl.NumberFormat('uk-UA').format(n).replace(/ /g, ' ')} ₴`;
   await expect(page.locator('[data-sum-total]')).toHaveText(fmt(3 * price));
   await expect(page.locator('[data-sum-saving]')).toHaveText(fmt(3 * (regular - price)));
@@ -61,24 +61,17 @@ test('choosing models updates the summary, badge and pick list', async ({ page }
   await expect(page.locator('[data-pick-list] li')).toHaveCount(1);
 
   // Typing works too, and the pick list controls the same quantity.
-  await sydney.locator('input').fill('7');
+  await bone.locator('input').fill('7');
   await expect(page.locator('[data-sum-count]')).toHaveText('7 шт.');
   await page.locator('[data-pick-list] [data-step="-1"]').click();
-  await expect(sydney.locator('input')).toHaveValue('6');
+  await expect(bone.locator('input')).toHaveValue('6');
 
   // Down to zero brings back "Add" and focuses it.
-  await sydney.locator('input').fill('1');
-  await sydney.locator('[data-step="-1"]').click();
-  await expect(sydney.locator('[data-add]')).toBeFocused();
+  await bone.locator('input').fill('1');
+  await bone.locator('[data-step="-1"]').click();
+  await expect(bone.locator('[data-add]')).toBeFocused();
   await expect(page.locator('[data-pick-empty]')).toBeVisible();
   await expect(page.locator('[data-count-badge]')).toBeHidden();
-});
-
-test('table "from" prices are labelled as such in the summary', async ({ page }) => {
-  await ready(page);
-  await page.locator('[data-card="gdansk"] [data-add]').click();
-  await expect(page.locator('[data-sum-total]')).toContainText('від');
-  await expect(page.locator('[data-sum-from]')).toBeVisible();
 });
 
 test('empty form shows errors and focuses the first problem', async ({ page }) => {
@@ -88,7 +81,7 @@ test('empty form shows errors and focuses the first problem', async ({ page }) =
   await expect(page.locator('[data-error-for="name"]')).toBeVisible();
   await expect(page.locator('[data-error-for="consent"]')).toBeVisible();
   await expect(page.locator('[data-pick-empty] a').first()).toBeFocused();
-  await page.locator('[data-card="fabio"] [data-add]').click();
+  await page.locator('[data-card="verke-10r"] [data-add]').click();
   await expect(page.locator('[data-error-for="items"]')).toBeHidden();
   await page.locator('[data-submit]').click();
   await expect(page.locator('#f-name')).toBeFocused();
@@ -97,9 +90,9 @@ test('empty form shows errors and focuses the first problem', async ({ page }) =
 
 test('full order: pick, fill, captcha, send, thank-you page with reference', async ({ page }) => {
   await ready(page);
-  await page.locator('[data-card="forte-01"] [data-add]').click();
-  await page.locator('[data-card="forte-01"] [data-step="1"]').click();
-  await page.locator('[data-card="grand"] [data-add]').click();
+  await page.locator('[data-card="layt"] [data-add]').click();
+  await page.locator('[data-card="layt"] [data-step="1"]').click();
+  await page.locator('[data-card="fin"] [data-add]').click();
   await page.fill('#f-name', 'Олена Тест');
   await page.fill('#f-phone', '+380 67 123 45 67');
   await page.fill('#f-email', 'olena@example.com');
@@ -120,9 +113,9 @@ test.describe('without JavaScript', () => {
   test.use({ javaScriptEnabled: false });
   test('quantities and the form still work and reach the server', async ({ page }) => {
     await page.goto('/');
-    await expect(page.locator('[data-card="sydney"] input')).toBeVisible();
-    await expect(page.locator('[data-card="sydney"] [data-add]')).toBeHidden();
-    await page.locator('[data-card="sydney"] input').fill('2');
+    await expect(page.locator('[data-card="bone"] input')).toBeVisible();
+    await expect(page.locator('[data-card="bone"] [data-add]')).toBeHidden();
+    await page.locator('[data-card="bone"] input').fill('2');
     await page.fill('#f-name', 'Олена');
     await page.fill('#f-phone', '+380671234567');
     await page.fill('#f-city', 'Львів');
@@ -139,7 +132,7 @@ test('sticky bar appears after picking, hides at the form', async ({ page }) => 
   await ready(page);
   const bar = page.locator('[data-cart-bar]');
   await expect(bar).toBeHidden();
-  await page.locator('[data-card="sydney"] [data-add]').click();
+  await page.locator('[data-card="bone"] [data-add]').click();
   await expect(bar).toBeVisible();
   await expect(bar).not.toHaveClass(/is-away/);
   await page.locator('#order-h').scrollIntoViewIfNeeded();
@@ -158,8 +151,8 @@ test('screenshots for review', async ({ page }) => {
   for (const [w, h] of [[390, 844], [1440, 900]]) {
     await page.setViewportSize({ width: w, height: h });
     await ready(page);
-    await page.locator('[data-card="sydney"] [data-add]').click();
-    await page.locator('[data-card="grand"] [data-add]').click();
+    await page.locator('[data-card="bone"] [data-add]').click();
+    await page.locator('[data-card="fin"] [data-add]').click();
     await page.screenshot({ path: `docs/qa/landing-${w}.png`, fullPage: true });
   }
 });

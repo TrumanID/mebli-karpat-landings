@@ -13,9 +13,9 @@ const types: Record<string, string> = { '.html': 'text/html; charset=utf-8', '.j
 const csp = readFileSync('public/_headers', 'utf8').split('\n').filter((l) => /^\s+[\w-]+: /.test(l)).slice(0, 5).map((l) => l.trim().split(/: (.*)/s).slice(0, 2) as [string, string]);
 const stubMail = (async (url: string | URL, init?: RequestInit) => {
   console.log('[stub]', String(url), init?.body ?? '');
-  return Response.json({ messageId: 'stub' });
+  return Response.json({ ok: true });
 }) as typeof fetch;
-const env = { BREVO_API_KEY: 'stub', ORDER_TO_EMAIL: 'sales@example.com', ORDER_FROM_EMAIL: 'noreply@example.com', CAPTCHA_SECRET: 'preview-only-secret' };
+const env = { ORDER_WEBHOOK_URL: 'https://script.google.com/stub', ORDER_WEBHOOK_SECRET: 'stub', CAPTCHA_SECRET: 'preview-only-secret' };
 
 createServer(async (req, res) => {
   const url = new URL(req.url!, `http://localhost:${port}`);

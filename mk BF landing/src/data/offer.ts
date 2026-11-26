@@ -2,8 +2,8 @@
  * The whole campaign in one place: dates, discount, models and regular prices.
  * Pages, the order form, the e-mail and the server-side price check all read from here.
  *
- * Regular prices: meblikarpat.com.ua product pages, read on 2026-11-09 (oak, oil-wax finish).
- * Anything marked EXAMPLE is a placeholder: the production build refuses to run until `approved` is all true.
+ * Regular prices: the current regular prices on meblikarpat.com.ua (oak, oil-wax finish), confirmed by the client on 2026-11-26.
+ * Black Friday prices are always calculated from `discountPercent`; the production build refuses to run until `approved` is all true.
  */
 
 export type Category = 'chairs' | 'tables';
@@ -22,6 +22,8 @@ export interface Product {
   from?: boolean;
   /** Set to override the price computed from `discountPercent` */
   bfPriceOverride?: number;
+  /** true when the table has an extension leaf (shows the «Розкладний» badge) */
+  extendable?: boolean;
   image: string;
   imageAlt: string;
   image2: string;
@@ -32,110 +34,110 @@ export interface Product {
 export const offer = {
   /** Black Friday 2026 is Friday 27 November. Times are Kyiv time. */
   startsAt: '2026-11-27T00:00:00+02:00',
-  /** EXAMPLE: end of the campaign (here Cyber Monday). */
+  /** End of the campaign (Cyber Monday), confirmed by the client on 2026-11-26. */
   endsAt: '2026-11-30T23:59:59+02:00',
-  /** EXAMPLE: discount on every model in the campaign. */
-  discountPercent: 20,
-  /** Last order date that still arrives by Christmas (25 December). null = unknown, shown as a TODO. */
-  christmasOrderBy: null as string | null,
+  /** Discount on every model in the campaign, confirmed by the client on 2026-11-26. */
+  discountPercent: 15,
+  /** Last order date that still arrives by Christmas (25 December). The client promises Christmas delivery for orders placed during the campaign, so this is the campaign's last day. null = unknown, shown as a TODO. */
+  christmasOrderBy: '2026-11-30' as string | null,
   /** Flip each to true once the client confirms it. */
-  approved: { prices: false, dates: false },
-  priceCheckedOn: '2026-11-09',
+  approved: { prices: true, dates: true },
   maxQty: 50,
 };
 
 export const products: Product[] = [
   {
-    slug: 'sydney',
+    slug: 'bone',
     category: 'chairs',
-    name: 'Сідней',
+    name: 'Боне',
     kind: 'Стілець',
-    descriptor: 'Стьобана спинка під зручним кутом і трапецієвидне сидіння на ніжках з масиву дуба.',
-    specs: ['880 × 540 × 600 мм', 'Висота сидіння 500 мм', 'Каркас: дуб'],
-    regular: 5715,
-    image: 'sydney-1.jpg',
-    imageAlt: 'Стілець «Сідней» зі світлою стьобаною оббивкою на дубових ніжках',
-    image2: 'sydney-2.jpg',
-    image2Alt: 'Стілець «Сідней», інший ракурс',
-    sourceUrl: 'https://meblikarpat.com.ua/stilec-sydney/',
+    descriptor: 'Авторська модель із вирізом у спинці та м’яким сидінням. Підійде для їдальні, вітальні й кухні.',
+    specs: ['840 × 550 × 480 мм', 'Висота сидіння 470 мм', 'Каркас: дуб'],
+    regular: 4940,
+    image: 'bone-1.jpg',
+    imageAlt: 'Стілець «Боне» з вирізом у спинці, бежева тканина, ніжки з дуба',
+    image2: 'bone-2.jpg',
+    image2Alt: 'Стілець «Боне», вигляд ззаду',
+    sourceUrl: 'https://meblikarpat.com.ua/stilec-bone/',
   },
   {
-    slug: 'forte-01',
+    slug: 'boris',
     category: 'chairs',
-    name: 'Форте 01',
+    name: 'Борис',
     kind: 'Стілець',
-    descriptor: 'Широке сидіння і вигнута спинка з вирізом-аркою. Ніжки з бука або дуба.',
-    specs: ['840 × 500 × 550 мм', 'Висота сидіння 470 мм', 'Каркас: бук або дуб'],
-    regular: 5170,
-    image: 'forte-01-1.jpg',
-    imageAlt: 'Стілець «Форте 01» з вирізом-аркою на спинці, світла тканина',
-    image2: 'forte-01-2.jpg',
-    image2Alt: 'Стілець «Форте 01», інший ракурс',
-    sourceUrl: 'https://meblikarpat.com.ua/stilec-forte-01/',
+    descriptor: 'М’яке сидіння й спинка на каркасі з масиву дуба. Добре виглядає і в тканині, і в екошкірі.',
+    specs: ['780 × 510 × 470 мм', 'Висота сидіння 480 мм', 'Каркас: дуб'],
+    regular: 6560,
+    image: 'boris-1.jpg',
+    imageAlt: 'Стілець «Борис» зі світло-сірою оббивкою на дубовому каркасі',
+    image2: 'boris-2.jpg',
+    image2Alt: 'Стілець «Борис», інший ракурс',
+    sourceUrl: 'https://meblikarpat.com.ua/stilec-boris/',
   },
   {
-    slug: 'lounge',
+    slug: 'layt',
     category: 'chairs',
-    name: 'Лаунж',
+    name: 'Лайт',
     kind: 'Стілець',
-    descriptor: 'Напівкругла спинка, яка огортає, на міцному дубовому каркасі.',
-    specs: ['790 × 600 × 540 мм', 'Висота сидіння 490 мм', 'Каркас: дуб'],
-    regular: 6880,
-    image: 'lounge-1.jpg',
-    imageAlt: 'Стілець «Лаунж» з напівкруглою спинкою, рожево-бежева тканина',
-    image2: 'lounge-2.jpg',
-    image2Alt: 'Стілець «Лаунж», інший ракурс',
-    sourceUrl: 'https://meblikarpat.com.ua/stilec-lounge/',
+    descriptor: 'Мінімалістичний стілець у стилі модерн: трапецієвидне сидіння, спинка під кутом, ніжки з дуба.',
+    specs: ['850 × 580 × 500 мм', 'Висота сидіння 470 мм', 'Каркас: дуб'],
+    regular: 5070,
+    bfPriceOverride: 4305, // price set by the client (the formula gives 4309)
+    image: 'layt-1.jpg',
+    imageAlt: 'Стілець «Лайт» зі світлою оббивкою на дубових ніжках',
+    image2: 'layt-2.jpg',
+    image2Alt: 'Стілець «Лайт», вигляд ззаду',
+    sourceUrl: 'https://meblikarpat.com.ua/stilec-layt/',
   },
   {
-    slug: 'grand',
+    slug: 'fin',
     category: 'tables',
-    name: 'Гранд',
+    name: 'Фін',
     kind: 'Стіл',
-    descriptor: 'Потягніть стільницю, і вставка 40 см підніметься сама. Масив дуба.',
-    specs: ['1400 × 800 мм, висота 750 мм', 'Розкладається до 1800 мм', 'Масив дуба'],
-    regular: 31620,
-    image: 'grand-1.jpg',
-    imageAlt: 'Прямокутний розкладний стіл «Гранд» з масиву дуба',
-    image2: 'grand-2.jpg',
-    image2Alt: 'Стіл «Гранд», інший ракурс',
-    sourceUrl: 'https://meblikarpat.com.ua/stil-derev-janij-grand/',
+    descriptor: 'Лаконічний стіл у мінімалістичному стилі: посилена дубова стільниця на металевому профілі.',
+    specs: ['100 × 200 см', 'Стільниця: дуб', 'Опора: металевий профіль'],
+    regular: 29410,
+    image: 'fin-1.jpg',
+    imageAlt: 'Стіл «Фін» з дубовою стільницею на чорній металевій опорі',
+    image2: 'fin-2.jpg',
+    image2Alt: 'Стіл «Фін», вигляд спереду',
+    sourceUrl: 'https://meblikarpat.com.ua/stil-fin-oak/',
   },
   {
-    slug: 'gdansk',
+    slug: 'verke-12r',
     category: 'tables',
-    name: 'Гданськ',
+    name: 'Верке 12Р',
     kind: 'Стіл',
-    descriptor: 'Овальний стіл з двома вставками по 50 см, які зберігаються окремо.',
-    specs: ['Овальна стільниця', 'Дві вставки по 500 мм', 'Масив дуба'],
-    regular: 34020,
-    from: true,
-    image: 'gdansk-1.jpg',
-    imageAlt: 'Овальний розкладний стіл «Гданськ» з масиву дуба',
-    image2: 'gdansk-2.jpg',
-    image2Alt: 'Стіл «Гданськ», інший ракурс',
-    sourceUrl: 'https://meblikarpat.com.ua/stil-gdansk/',
+    descriptor: 'Прямокутний стіл на чотирьох трапецієвидних ніжках. Розкладається: додаткова вставка 40 см.',
+    specs: ['80 × 120 см', 'Вставка 40 см', 'Масив дуба'],
+    regular: 21390,
+    extendable: true,
+    image: 'verke-12r-1.jpg',
+    imageAlt: 'Прямокутний розкладний стіл «Верке 12Р» з масиву дуба',
+    image2: 'verke-12r-2.jpg',
+    image2Alt: 'Стіл «Верке 12Р», інший ракурс',
+    sourceUrl: 'https://meblikarpat.com.ua/stil-derev-janij-verke-prjamokutnij/',
   },
   {
-    slug: 'fabio',
+    slug: 'verke-10r',
     category: 'tables',
-    name: 'Фабіо',
+    name: 'Верке 10Р',
     kind: 'Стіл',
-    descriptor: 'Компактний круглий стіл, який з двома вставками по 50 см приймає більше гостей.',
-    specs: ['Кругла стільниця', 'Дві вставки по 500 мм', 'Масив дуба'],
-    regular: 33570,
-    from: true,
-    image: 'fabio-1.jpg',
-    imageAlt: 'Круглий розкладний стіл «Фабіо» з масиву дуба',
-    image2: 'fabio-2.jpg',
-    image2Alt: 'Стіл «Фабіо», інший ракурс',
-    sourceUrl: 'https://meblikarpat.com.ua/stil-fabio/',
+    descriptor: 'Компактний круглий стіл: зі вставкою 40 см стає овальним і приймає більше гостей.',
+    specs: ['100 × 100 см', 'Вставка 40 см', 'Масив дуба'],
+    regular: 19520,
+    extendable: true,
+    image: 'verke-10r-1.jpg',
+    imageAlt: 'Круглий розкладний стіл «Верке 10Р» з масиву дуба',
+    image2: 'verke-10r-2.jpg',
+    image2Alt: 'Стіл «Верке 10Р», інший ракурс',
+    sourceUrl: 'https://meblikarpat.com.ua/stil-derev-janij-verke-kruglij/',
   },
 ];
 
-/** Rounded down to whole tens of hryvnias, so the advertised saving is never smaller than promised. */
+/** Rounded down to a whole hryvnia, so the advertised saving is never smaller than promised. */
 export const bfPrice = (p: Product) =>
-  p.bfPriceOverride ?? Math.floor((p.regular * (100 - offer.discountPercent)) / 100 / 10) * 10;
+  p.bfPriceOverride ?? Math.floor((p.regular * (100 - offer.discountPercent)) / 100);
 
 export const company = {
   name: 'Меблі Карпат',
@@ -144,4 +146,10 @@ export const company = {
   email: 'info@meblikarpat.com.ua',
   site: 'https://meblikarpat.com.ua/',
   since: 2002,
+  /** Full legal name, tax ID and address for the privacy page. null = not shown on the page. */
+  legalEntity: null as string | null,
+  /** How long requests that did not become an order are kept (set by the developer on 2026-11-26, to be confirmed by the client). */
+  retention: '12 місяців' as string | null,
+  /** Date shown on the privacy page. */
+  privacyUpdated: '2026-11-26',
 };
