@@ -37,7 +37,7 @@ const err = (name: string) => `${name}-error`;
           <div class="field-error" id={err('phone')} data-error-for="phone" hidden></div>
         </div>
         <div class="field">
-          <label for="f-email">E-mail <span class="opt">для підтвердження, необов’язково</span></label>
+          <label for="f-email">E-mail <span class="opt">необов’язково</span></label>
           <input id="f-email" name="email" type="email" autocomplete="email" maxlength="200" aria-describedby={err('email')} />
           <div class="field-error" id={err('email')} data-error-for="email" hidden></div>
         </div>
@@ -109,7 +109,7 @@ const err = (name: string) => `${name}-error`;
         <div class="sum-save"><dt>Ваша економія</dt><dd data-sum-saving>0 ₴</dd></div>
         <div class="sum-total"><dt>Разом за ціною Black Friday</dt><dd data-sum-total>0 ₴</dd></div>
       </dl>
-      <p class="hint" data-sum-from hidden>Для столів «Гданськ» і «Фабіо» ціна залежить від розміру: це ціна «від».</p>
+      <p class="hint" data-sum-from hidden>Для деяких моделей ціна залежить від розміру: це ціна «від».</p>
       <p class="summary-empty" data-sum-empty>Додайте моделі, і тут з’явиться сума та ваша економія.</p>
       <noscript><p class="summary-empty">Суму підтвердить менеджер.</p></noscript>
       <ul class="summary-facts">

@@ -4,9 +4,10 @@ import { burnCaptcha, createChallenge, verifyCaptcha } from './captcha.ts';
 import { company } from '../data/offer.ts';
 
 export interface OrderEnv {
-  ORDER_TO_EMAIL?: string;
-  ORDER_FROM_EMAIL?: string;
-  BREVO_API_KEY?: string;
+  /** URL of the Google Apps Script web app that e-mails the request to the owner's Gmail. */
+  ORDER_WEBHOOK_URL?: string;
+  /** Shared secret the script checks, so only this site can use it. */
+  ORDER_WEBHOOK_SECRET?: string;
   CAPTCHA_SECRET?: string;
 }
 export interface Deps { fetch?: typeof fetch; now?: () => number }
@@ -33,19 +34,18 @@ function reference(now: number) {
   return `BF-${d}-${rand.toUpperCase()}`;
 }
 
-async function sendMail(env: OrderEnv, f: typeof fetch, to: string, subject: string, text: string, replyTo?: string) {
-  const res = await f('https://api.brevo.com/v3/smtp/email', {
+/** Hands the request to the Apps Script web app, which e-mails it to the Gmail inbox. */
+async function sendToInbox(env: OrderEnv, f: typeof fetch, subject: string, text: string, replyTo?: string) {
+  const res = await f(env.ORDER_WEBHOOK_URL!, {
     method: 'POST',
-    headers: { 'api-key': env.BREVO_API_KEY!, 'content-type': 'application/json', accept: 'application/json' },
-    body: JSON.stringify({
-      sender: { email: env.ORDER_FROM_EMAIL, name: company.name },
-      to: [{ email: to }],
-      ...(replyTo ? { replyTo: { email: replyTo } } : {}),
-      subject,
-      textContent: text,
-    }),
+    // text/plain keeps this a "simple" request; the script reads the raw body.
+    headers: { 'content-type': 'text/plain;charset=utf-8' },
+    body: JSON.stringify({ secret: env.ORDER_WEBHOOK_SECRET, subject, text, replyTo }),
+    redirect: 'follow',
   });
-  if (!res.ok) throw new Error(`mail provider responded ${res.status}`);
+  if (!res.ok) throw new Error(`inbox webhook responded ${res.status}`);
+  const body = await res.json().catch(() => null) as { ok?: boolean } | null;
+  if (!body?.ok) throw new Error('inbox webhook did not confirm');
 }
 
 export function salesText(o: Order, ref: string) {
@@ -54,12 +54,6 @@ export function salesText(o: Order, ref: string) {
     line('Ім’я', o.name) + line('Телефон', o.phone) + line('E-mail', o.email) + line('Населений пункт', o.city) +
     line('Отримання', DELIVERY[o.delivery]) + line('Побажання', o.comment) +
     `\nЗгода на обробку даних: так\nЦіни розраховано на сервері за src/data/offer.ts.\n`;
-}
-
-export function customerText(o: Order, ref: string) {
-  return `Добрий день, ${o.name}!\n\nДякуємо за заявку ${ref}. Ми отримали ваш вибір:\n\n${orderText(o)}\n\n` +
-    `Це ще не замовлення і не рахунок. Менеджер зв’яжеться з вами, щоб узгодити колір, тканину, розмір і строк, ` +
-    `а потім надішле договір і рахунок на передоплату 50 %.\n\n${company.name}\n${company.phoneDisplay}\n${company.email}\n`;
 }
 
 export async function handleChallenge(env: OrderEnv, now = Date.now()): Promise<Response> {
@@ -114,8 +108,8 @@ export async function handleOrder(request: Request, env: OrderEnv, deps: Deps = 
     const errors: Record<string, string> = { ...(result.ok ? {} : result.errors), ...(captcha.ok ? {} : { captcha: 'captcha' }) };
     return failure(422, 'validation', 'Перевірте форму', Object.values(errors).map((c) => MESSAGES[c]!), errors);
   }
-  if (!env.BREVO_API_KEY || !env.ORDER_TO_EMAIL || !env.ORDER_FROM_EMAIL) {
-    console.error('order: email is not configured');
+  if (!env.ORDER_WEBHOOK_URL || !env.ORDER_WEBHOOK_SECRET) {
+    console.error('order: inbox webhook is not configured');
     return failure(503, 'not_configured', sendError);
   }
 
@@ -124,14 +118,10 @@ export async function handleOrder(request: Request, env: OrderEnv, deps: Deps = 
   const ref = reference(now);
   const t = totals(o.lines);
   try {
-    await sendMail(env, f, env.ORDER_TO_EMAIL, `[Black Friday] ${o.name}, ${t.count} шт. (${ref})`, salesText(o, ref), o.email);
+    await sendToInbox(env, f, `[Black Friday] ${o.name}, ${t.count} шт. (${ref})`, salesText(o, ref), o.email);
   } catch (err) {
-    console.error('order: sales email failed', (err as Error).message); // no personal data in logs
+    console.error('order: sending to inbox failed', (err as Error).message); // no personal data in logs
     return failure(502, 'send_failed', sendError);
-  }
-  if (o.email) {
-    await sendMail(env, f, o.email, `Ваша заявка ${ref}: ${company.name}, Black Friday`, customerText(o, ref))
-      .catch((err) => console.error('order: confirmation email failed', err.message));
   }
   return success(ref);
 }

@@ -227,6 +227,16 @@ mark.todo { background: var(--todo); color: #1a1600; font-size: 0.85rem; font-we
 .js .card:not(.is-picked) .qty-row { display: none; }
 .js .card.is-picked .qty-add { display: none; }
 
+/* Swatches */
+.swatch-groups { display: flex; flex-wrap: wrap; gap: 2.5rem 4rem; }
+.swatch-h { font-size: 1.1rem; margin-bottom: 1rem; }
+.swatch-grid { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 1rem; }
+.swatch { flex: 0 0 calc(50% - 0.5rem); background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+@media (min-width: 560px) { .swatch { flex-basis: 10rem; } }
+.swatch picture { display: block; aspect-ratio: 1; background: var(--photo); }
+.swatch-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.swatch-name { padding: 0.7rem 0.9rem; font-weight: 700; font-size: 0.95rem; }
+
 /* Steps */
 .steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 1rem; counter-reset: step; }
 @media (min-width: 860px) { .steps { grid-template-columns: repeat(3, 1fr); gap: 1.25rem; } }
@@ -365,6 +375,9 @@ body:has(.cart-bar:not([hidden])) .site-footer { padding-bottom: 6.5rem; }
 .ref[hidden] { display: none; }
 .prose h2 { font-size: 1.2rem; margin-top: 2.2rem; }
 .prose p { margin-top: 0.7rem; color: var(--muted); }
+.prose ul { margin: 0.7rem 0 0; padding-left: 1.3rem; color: var(--muted); }
+.prose li { margin-top: 0.35rem; }
+.prose a { color: var(--text); text-decoration: underline; text-underline-offset: 0.2em; }
 
 /* Reveal on scroll, CSS only. Content stays visible where unsupported. */
 @supports (animation-timeline: view()) {

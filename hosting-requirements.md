@@ -14,8 +14,8 @@ This document covers two sites. Both are built the same way, so one set of requi
 ## 1. What the application is
 
 - **Static pages.** HTML, CSS, JS, fonts and images are generated at build time into `dist/`. There is no database, no CMS, no PHP, no user accounts and no cookies.
-- **Two small server endpoints per site.** One issues a captcha challenge. The other receives the form, checks it, recalculates prices on the server (BF), and sends e-mail through the Brevo API.
-- **Nothing is stored on the server.** A submitted form becomes an e-mail to sales, plus a confirmation to the buyer if they gave an address. The B2B site can optionally also post the request to a webhook (a CRM, for example).
+- **Two small server endpoints per site.** One issues a captcha challenge. The other receives the form, checks it, recalculates prices on the server (BF), and sends e-mail: the B2B site through the Brevo API, the Black Friday landing through a Google Apps Script web app that e-mails a Gmail inbox (`mk BF landing/docs/gmail-setup.uk.md`).
+- **Nothing is stored on the server.** A submitted form becomes an e-mail to sales; the B2B site also sends a confirmation to the buyer if they gave an address, the Black Friday landing shows a thank-you page instead. The B2B site can optionally also post the request to a webhook (a CRM, for example).
 
 ## 2. Recommended hosting: Cloudflare Pages
 
@@ -55,7 +55,7 @@ Use this list if the client prefers another provider, for example Ukrainian host
 | Requirement | Notes |
 |---|---|
 | Runtime | Cloudflare Workers (ready). **Or** Node.js 22.12 or newer: the code uses the standard `Request`, `Response`, `fetch` and Web Crypto APIs, so a small Node wrapper is needed. A wrapper already exists for local testing (`scripts/preview-server.ts`); a production version needs real e-mail sending and must run behind the HTTPS server. **PHP-only hosting cannot run it:** the two endpoints would have to be rewritten in PHP. |
-| Outgoing HTTPS | To `api.brevo.com` (port 443). For B2B, also to the webhook URL if one is used. |
+| Outgoing HTTPS | B2B: to `api.brevo.com` (port 443). BF: to `script.google.com` (port 443). For B2B, also to the webhook URL if one is used. |
 | Secret storage | Environment variables that are not in the code or in public files (section 5). |
 | Real visitor IP | The rate limit reads `cf-connecting-ip`. Behind another proxy, the code must be changed to read the correct header (for example `X-Forwarded-For` from a trusted proxy). |
 | Request timeout | At least 10 seconds: the form endpoint waits for Brevo before answering. |
@@ -78,7 +78,11 @@ The rate limit and the captcha replay check are kept **in memory of one server i
 - a rate-limiting rule on `POST /api/order` and `POST /api/rfq` (Cloudflare: Security → WAF → Rate limiting rules);
 - basic bot protection or a WAF, if the provider has one.
 
-## 4. E-mail (Brevo)
+## 4. E-mail
+
+**Black Friday landing:** no Brevo, domain or DNS records are needed. The server posts the request to a Google Apps Script web app owned by the Gmail account that receives requests; setup is in `mk BF landing/docs/gmail-setup.uk.md`. A free Gmail account allows about 100 messages a day. If the script is unreachable, the form tells the buyer it could not send and shows the phone number.
+
+**B2B site (Brevo):**
 
 | Requirement | Notes |
 |---|---|
@@ -99,9 +103,8 @@ Set them as secrets on the hosting. Values never go into the code.
 | Variable | Value |
 |---|---|
 | `PUBLIC_STAGE` | `production` at build time (hides internal TODO markers) |
-| `ORDER_TO_EMAIL` | Sales mailbox for requests |
-| `ORDER_FROM_EMAIL` | Verified sender address |
-| `BREVO_API_KEY` | Brevo API key |
+| `ORDER_WEBHOOK_URL` | Web app URL of the Google Apps Script that e-mails the Gmail inbox |
+| `ORDER_WEBHOOK_SECRET` | Shared secret, same as `SECRET` in the script |
 | `CAPTCHA_SECRET` | Long random string, e.g. the output of `openssl rand -hex 32` |
 
 **B2B site**
@@ -122,7 +125,7 @@ Without the captcha secret or the e-mail settings, the form refuses requests wit
 
 - Access to the DNS of `meblikarpat.com.ua`, or someone at the client who can add records.
 - A `CNAME` (or `A`/`AAAA`) record for each subdomain, pointing to the hosting.
-- The Brevo SPF, DKIM and DMARC records from section 4.
+- For the B2B site: the Brevo SPF, DKIM and DMARC records from section 4 (not needed for the Black Friday landing).
 - If the BF page should live at `meblikarpat.com.ua/black-friday` (a path on the main site rather than a subdomain), the main site's server must forward that path to the landing. Agree this with whoever runs the main site; a subdomain is simpler.
 
 ## 7. Personal data and location
@@ -141,7 +144,7 @@ The pages are static and small, so a CDN or any ordinary host serves Black Frida
 - [ ] `https://…/` opens; `http://…/` redirects to HTTPS.
 - [ ] Response headers include `Content-Security-Policy`, `Strict-Transport-Security` and `X-Content-Type-Options` (check in browser dev tools, or at securityheaders.com).
 - [ ] `/privacy/` (BF) or `/datenschutz/` (B2B) open; `/nope/` returns status 404 with the styled page.
-- [ ] A test request from a phone arrives in the sales mailbox; the confirmation arrives in the buyer's mailbox and is **not** in spam.
+- [ ] A test request from a phone arrives in the sales mailbox (BF: the Gmail inbox) and is **not** in spam; on the B2B site the confirmation also arrives in the buyer's mailbox.
 - [ ] The same test with JavaScript switched off also arrives.
 - [ ] No yellow TODO markers or "example prices" banner are visible.
 - [ ] Lighthouse mobile scores are close to the local results (100 in all four categories).

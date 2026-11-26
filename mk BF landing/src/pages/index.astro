@@ -5,7 +5,7 @@ import ProductCard from '../components/ProductCard.astro';
 import OrderForm from '../components/OrderForm.astro';
 import Todo from '../components/Todo.astro';
 import { bfPrice, company, offer, products } from '../data/offer.ts';
-import { productImage } from '../lib/images.ts';
+import { productImage, swatchImage } from '../lib/images.ts';
 import { uah } from '../lib/order.ts';
 import { isProduction } from '../lib/stage.ts';
 
@@ -25,20 +25,28 @@ const chairs = products.filter((p) => p.category === 'chairs');
 const tables = products.filter((p) => p.category === 'tables');
 const minChair = Math.min(...chairs.map(bfPrice));
 const minTable = Math.min(...tables.map(bfPrice));
-const hero = productImage('grand-1.jpg');
-const heroChair = productImage('lounge-1.jpg');
-const heroChair2 = productImage('sydney-1.jpg');
+const hero = productImage('fin-1.jpg');
+const heroChair = productImage('bone-1.jpg');
+const heroChair2 = productImage('layt-1.jpg');
+const woods = [
+  { file: 'wood-oil-wax.jpg', name: 'Олія-віск', note: 'Дуб' },
+  { file: 'wood-smoky.jpg', name: 'Димчатий', note: 'Дуб' },
+];
+const fabrics = [
+  { file: 'fabric-light-grey.jpg', name: 'Світло-сірий беж' },
+  { file: 'fabric-beige.jpg', name: 'Теплий беж' },
+  { file: 'fabric-blue-grey.jpg', name: 'Сіро-блакитний' },
+];
 const ticker = ['Black Friday', `−${offer.discountPercent} %`, 'Чорна п’ятниця', 'Масив дуба', 'Готуємося до Різдва'];
 ---
 <Base
   title={`Black Friday у Меблі Карпат: −${offer.discountPercent} % на стільці та столи з дуба`}
-  description={`Купуйте в Чорну п’ятницю, користуйтеся на Різдво. Стільці та розкладні столи з масиву дуба зі знижкою ${offer.discountPercent} %, ${period}.`}
+  description={`Купуйте в Чорну п’ятницю, користуйтеся на Різдво. Стільці та столи з масиву дуба зі знижкою ${offer.discountPercent} %, ${period}.`}
   path="/"
 >
-  {!isProduction && (!offer.approved.prices || !offer.approved.dates) && (
+  {!isProduction && !offer.approved.dates && (
     <div class="preview-banner" role="note">
-      <strong>Чернетка.</strong> Знижка {offer.discountPercent} % і дати акції наведено для прикладу, клієнт їх ще не затвердив.
-      Звичайні ціни взято з meblikarpat.com.ua {day(offer.priceCheckedOn, { day: 'numeric', month: 'long', year: 'numeric' })}.
+      <strong>Чернетка.</strong> Ціни та знижку {offer.discountPercent} % надав клієнт. Дати акції ({period}) наведено для прикладу, клієнт їх ще не затвердив.
     </div>
   )}
 
@@ -52,12 +60,12 @@ const ticker = ['Black Friday', `−${offer.discountPercent} %`, 'Чорна п�
           <span class="hero-accent">Користуйтеся на&nbsp;Різдво.</span>
         </h1>
         <p class="hero-lead">
-          Стільці та розкладні столи з масиву дуба від виробника, зі знижкою {offer.discountPercent} %.
+          Стільці та столи з масиву дуба від виробника, зі знижкою {offer.discountPercent} %.
           Оберіть моделі й кількість, і ми підготуємо їх до свят.
         </p>
         <p class="hero-deadline">
           {offer.christmasOrderBy
-            ? <>Встигніть до Різдва: замовлення до <strong>{day(offer.christmasOrderBy)}</strong>.</>
+            ? <>Встигніть до Різдва: замовивши до <strong>{day(offer.christmasOrderBy)}</strong>.</>
             : <Todo text="до якої дати треба замовити, щоб отримати меблі до 25 грудня" />}
         </p>
 
@@ -105,7 +113,7 @@ const ticker = ['Black Friday', `−${offer.discountPercent} %`, 'Чорна п�
   <section class="perks" aria-label="Чому Меблі Карпат">
     <ul class="container perk-list">
       <li><strong>З {company.since} року</strong><span>власне виробництво меблів з масиву</span></li>
-      <li><strong>Масив дерева</strong><span>дуб, для «Форте 01» також бук</span></li>
+      <li><strong>Масив дуба</strong><span>каркас стільців і стільниці столів</span></li>
       <li><strong>18 місяців</strong><span>гарантія на меблі</span></li>
       <li><strong>Ваші кольори</strong><span>колір каркаса й тканина з палітри</span></li>
     </ul>
@@ -116,7 +124,7 @@ const ticker = ['Black Friday', `−${offer.discountPercent} %`, 'Чорна п�
       <div class="section-head">
         <p class="kicker">Стільці · від {uah(minChair)}</p>
         <h2 id="chairs-h" class="section-h">Місця для всієї родини</h2>
-        <p class="section-lead">Три моделі з дубовим каркасом і м’якою оббивкою. Тканину й колір каркаса обираєте з палітри.</p>
+        <p class="section-lead">Три моделі з дубовим каркасом і м’якою оббивкою. Тканину й колір каркаса обираєте з палітри: зразки нижче.</p>
       </div>
       <div class="card-grid">
         {chairs.map((p) => <ProductCard product={p} />)}
@@ -127,14 +135,48 @@ const ticker = ['Black Friday', `−${offer.discountPercent} %`, 'Чорна п�
   <section id="tables" class="section section-alt" aria-labelledby="tables-h">
     <div class="container">
       <div class="section-head">
-        <p class="kicker">Розкладні столи · від {uah(minTable)}</p>
-        <h2 id="tables-h" class="section-h">Розкладіть, і місця вистачить усім</h2>
-        <p class="section-lead">Щодня компактний, на свята більший. Усі три столи з масиву дуба і розкладаються.</p>
+        <p class="kicker">Столи · від {uah(minTable)}</p>
+        <h2 id="tables-h" class="section-h">Стіл, за яким вистачить місця всім</h2>
+        <p class="section-lead">Великий стіл Фін для просторої кімнати і два компактні Верке, які розкладаються на свята вставкою 40 см.</p>
       </div>
       <div class="card-grid">
         {tables.map((p) => <ProductCard product={p} />)}
       </div>
-      <p class="fine">Ціни вказано для дуба в покритті олія-віск. Для «Гданськ» і «Фабіо» ціна залежить від розміру. Власна комбінація кольорів +10 % до вартості.</p>
+      <p class="fine">Ціни вказано для дуба в покритті олія-віск. Власна комбінація кольорів +10 % до вартості.</p>
+    </div>
+  </section>
+
+  <section id="samples" class="section" aria-labelledby="samples-h">
+    <div class="container">
+      <div class="section-head">
+        <p class="kicker">Зразки</p>
+        <h2 id="samples-h" class="section-h">Деревина й тканини</h2>
+        <p class="section-lead">Так виглядають покриття дуба й тканини для оббивки. Точний колір і тканину узгодимо з менеджером; на екрані відтінки можуть трохи відрізнятися від живих.</p>
+      </div>
+      <div class="swatch-groups">
+        <div>
+          <h3 class="swatch-h">Дуб</h3>
+          <ul class="swatch-grid">
+            {woods.map((w) => (
+              <li class="swatch">
+                <Picture src={swatchImage(w.file)} alt={`Зразок дуба, покриття «${w.name}»`} widths={[240, 360, 480]} sizes="(min-width: 720px) 220px, 44vw" formats={['avif', 'webp']} class="swatch-img" loading="lazy" />
+                <p class="swatch-name">{w.name}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <h3 class="swatch-h">Тканини</h3>
+          <ul class="swatch-grid">
+            {fabrics.map((f) => (
+              <li class="swatch">
+                <Picture src={swatchImage(f.file)} alt={`Зразок тканини: ${f.name.toLowerCase()}`} widths={[240, 360, 480]} sizes="(min-width: 720px) 220px, 30vw" formats={['avif', 'webp']} class="swatch-img" loading="lazy" />
+                <p class="swatch-name">{f.name}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -169,7 +211,7 @@ const ticker = ['Black Friday', `−${offer.discountPercent} %`, 'Чорна п�
       <div class="section-head">
         <p class="kicker">Заявка</p>
         <h2 id="order-h" class="section-h">Зафіксуйте ціну Black Friday</h2>
-        <p class="section-lead">Перевірте вибір і залиште контакти. Ми зателефонуємо й узгодимо деталі. <Todo text="за який час менеджер відповідає на заявку" /></p>
+        <p class="section-lead">Перевірте вибір і залиште контакти. Ми зателефонуємо й узгодимо деталі.</p>
       </div>
       <OrderForm />
     </div>
@@ -185,7 +227,7 @@ const ticker = ['Black Friday', `−${offer.discountPercent} %`, 'Чорна п�
         <details>
           <summary>Чи встигну я отримати меблі до Різдва?</summary>
           <div class="faq-a">
-            <p>Стандартний строк виготовлення 15–45 робочих днів залежно від моделі, для столу «Гранд» до 60 днів. Тому чим раніше заявка, тим надійніше.</p>
+            <p>Чим раніше заявка, тим надійніше: строки залежать від моделі та завантаження виробництва.</p>
             <p>{offer.christmasOrderBy ? <>Замовлення, оформлені до {day(offer.christmasOrderBy)}, плануємо доставити до 25 грудня.</> : <Todo text="дата, до якої гарантуєте доставку до Різдва" />}</p>
           </div>
         </details>
@@ -207,7 +249,7 @@ const ticker = ['Black Friday', `−${offer.discountPercent} %`, 'Чорна п�
         </details>
         <details>
           <summary>Чи діє знижка на інші моделі?</summary>
-          <div class="faq-a"><p>Ціна Black Friday діє на моделі на цій сторінці. Про інші моделі запитайте менеджера: <a href={`tel:${company.phone}`}>{company.phoneDisplay}</a>. <Todo text="чи поширюється знижка на інші моделі каталогу" /></p></div>
+          <div class="faq-a"><p>Ціна Black Friday діє на моделі на цій сторінці. Про інші моделі запитайте менеджера: <a href={`tel:${company.phone}`}>{company.phoneDisplay}</a>.</p></div>
         </details>
       </div>
     </div>

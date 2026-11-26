@@ -16,7 +16,7 @@ const sizes = '(min-width: 1100px) 400px, (min-width: 720px) 45vw, 92vw';
     <Picture src={productImage(p.image)} alt={p.imageAlt} widths={[360, 520, 800]} sizes={sizes} formats={['avif', 'webp']} class="card-img" loading="lazy" />
     <Picture src={productImage(p.image2)} alt="" widths={[360, 520, 800]} sizes={sizes} formats={['avif', 'webp']} class="card-img card-img-alt" loading="lazy" />
     <span class="badge-sale">−{offer.discountPercent} %</span>
-    {p.category === 'tables' && <span class="badge-tag">Розкладний</span>}
+    {p.extendable && <span class="badge-tag">Розкладний</span>}
   </div>
   <div class="card-body">
     <p class="card-kind">{p.kind}</p>
